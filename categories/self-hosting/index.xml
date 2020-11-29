@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>self-hosting on Eric-Pierce.com</title>
+    <title>self-hosting on eric-pierce.com</title>
     <link>https://eric-pierce.com/categories/self-hosting/</link>
-    <description>Recent content in self-hosting on Eric-Pierce.com</description>
+    <description>Recent content in self-hosting on eric-pierce.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 28 Nov 2020 17:16:19 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/categories/self-hosting/index.xml" rel="self" type="application/rss+xml" />
