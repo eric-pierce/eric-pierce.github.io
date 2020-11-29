@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>self-hosting on Eric-Pierce.com</title>
+    <link>https://eric-pierce.com/categories/self-hosting/</link>
+    <description>Recent content in self-hosting on Eric-Pierce.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Nov 2020 17:16:19 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/categories/self-hosting/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building A Personal Cloud</title>
+      <link>https://eric-pierce.com/posts/building-a-personal-cloud/</link>
+      <pubDate>Sat, 28 Nov 2020 17:16:19 -0600</pubDate>
+      
+      <guid>https://eric-pierce.com/posts/building-a-personal-cloud/</guid>
+      <description>In 2019 I began to replace services that I use and which use my data with services I can host on a personal Virtual Private Server, and have complete control of the data. In 2020 I went through a migration from Traefik 1.7 to 2.3, and took the opportunity to completely revamp my self hosting approach, applications, best practices, security, and more. I&amp;rsquo;m hosting everything on a Contabo VPS and on a local Raspberry Pi.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Eric-Pierce.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.79.0" /><meta property="og:site_name" content="Eric-Pierce.com">
+  <meta property="og:title" content="Eric-Pierce.com">
+  <meta property="og:description" content="Data Science, Projects, Travel and More">
+  <meta property="description" content="Data Science, Projects, Travel and More">
+  <meta property="og:url" content="https://eric-pierce.com/">
+  <meta property="og:type" content="website">
+  
+    <meta property="og:image" content="https://eric-pierce.com/img/main/logo.jpg">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+  <div id="theme-message" style="background-color:#3c3b3b;color:#f4f4f4;margin:auto auto;padding:.25em 2em;width:75%;">
+    <p style="text-align:center;">This message, related to the development of the theme, only displays on the
+      <code>localhost</code> homepage to notify you of any important theme changes.</p>
+      <hr>
+      <h5 style="color:#f4f4f4;text-align:center;"><i class="fas fa-exclamation-triangle"></i>Version 2.0.0 - July 20, 2020<i class="fas fa-exclamation-triangle"></i></h5>
+    <p>Below are the following changes that <em>could</em> be breaking changes for your site. For more details on any change, please refer to <a href="https://github.com/pacollins/hugo-future-imperfect-slim/pull/154">PR #154</a>.</p>
+<p>The major breaking change is:</p>
+<ol>
+<li>Users that have front matter that utilize <code>images</code> (backwards compatibility for <code>featured</code> and associated parameters still remains) <em>will</em> need to adjust from <code>[images]=&quot;SRC&quot;</code> to the new format.</li>
+</ol>
+<pre><code>[[images]]
+    src = &quot;&quot; // Link to image
+    alt = &quot;&quot; // Alt text for image
+    stretch = // Optional: See screenshots for referenced values and outcomes
+</code></pre><p>If you utilize any of the following, there <em>might</em> be a breaking:</p>
+<ol>
+<li>User custom templates <em>may</em> require adjustment.</li>
+<li>User custom i18n languages, or custom templates referencing i18n translations <em>may</em> require adjustment.</li>
+<li>User custom template for comments <em>will</em> require adjustment <em>if</em> it uses the theme&rsquo;s CSS and/or JS.</li>
+<li>User custom CSS <em>may</em> need to adjust due to a variety of class name changes and specificity changes.</li>
+</ol>
+<p>While I realize this is inconvenient, I hope that it is worth it to you in the long run. Thanks for using the theme, and feel free to submit issues as needed.</p>
+
+    <div style="text-align:center;">
+      <button onclick="removeBox()" class="button" style="color:#f4f4f4;margin-bottom:1em;">Close Notification Until Next Update</button>
+    </div>
+    <script>
+      if (window.location.href.indexOf('localhost:') < 1 || window.localStorage.getItem('HFIS-version') == '2.0.0') {
+        document.getElementsByTagName("body")[0].removeChild(document.getElementById("theme-message"));
+      }
+      function removeBox() {
+        window.localStorage.setItem('HFIS-version', '2.0.0');
+        document.getElementsByTagName("body")[0].removeChild(document.getElementById("theme-message"));
+      }
+    </script>
+  </div>
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Eric-Pierce.com
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/posts/" class="nav link"><i class='far fa-newspaper'></i> Posts</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Eric-Pierce.com&amp;url=https%3a%2f%2feric-pierce.com%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2feric-pierce.com%2f&amp;title=Eric-Pierce.com" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2feric-pierce.com%2f&amp;title=Eric-Pierce.com" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2feric-pierce.com%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://eric-pierce.com/img/main/logo.jpg" class="circle" width="100" alt="Eric Pierce" /></a>
+  <header>
+    <h1>Eric Pierce</h1>
+  </header>
+  <main>
+    <p>Data Science, Projects, Travel and More</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
+
+
+        <li><a href="//github.com/eric-pierce" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/ericrpierce" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:contact@eric-pierce.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  
+  
+    <article class="post">
+  <header>
+  <div class="title">
+    
+      <h2><a href="/posts/building-a-personal-cloud/">Building A Personal Cloud</a></h2>
+    
+    
+  </div>
+  <div class="meta">
+    <time datetime="2020-11-28 17:16:19 -0600 CST">November 28, 2020</time>
+    <p>Eric Pierce</p>
+    <p>5-Minute Read</p>
+  </div>
+</header>
+
+  <div class="content">
+    <a href="/posts/building-a-personal-cloud/" class="image">
+    <img class="stretchV" src="https://eric-pierce.com/img/2020/11/docker.png" alt="Docker">
+  </a>
+    
+    <p>In 2019 I began to replace services that I use and which use my data with services I can host on a personal Virtual Private Server, and have complete control of the data. In 2020 I went through a migration from Traefik 1.7 to 2.3, and took the opportunity to completely revamp my self hosting approach, applications, best practices, security, and more. I&rsquo;m hosting everything on a Contabo VPS and on a local Raspberry Pi.</p>
+  </div>
+  <footer>
+    <a href="/posts/building-a-personal-cloud/" class="button big">Read More</a>
+    <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/self-hosting/">self-hosting</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/docker/">docker</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+  </footer>
+</article>
+
+  
+  <div class="pagination">
+    
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/posts/building-a-personal-cloud/" class="image">
+    <img class="stretchV" src="https://eric-pierce.com/img/2020/11/docker.png" alt="Docker">
+  </a>
+        <header>
+          <h2><a href="/posts/building-a-personal-cloud/">Building A Personal Cloud</a></h2>
+          <time class="published" datetime="2020-11-28 17:16:19 -0600 CST">November 28, 2020</time>
+        </header>
+      </article>
+      
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Category</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/self-hosting/">self-hosting<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>Data Science, Projects, Travel and More</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
+
+
+        <li><a href="//github.com/eric-pierce" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/ericrpierce" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:contact@eric-pierce.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2020 Eric-Pierce.com
+      <br>
+    
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.5955090a3253deadcd66071270aa2274dabe15ffc97094cec252d87b6f3f00bf.js" integrity="sha256-WVUJCjJT3q3NZgcScKoidNq&#43;Ff/JcJTOwlLYe28/AL8="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://eric-pierce.com/posts/building-a-personal-cloud/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/categories/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/tags/docker/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/posts/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/categories/self-hosting/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/tags/</loc>
+    <lastmod>2020-11-28T17:16:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/about/</loc>
+    <lastmod>2020-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://eric-pierce.com/contact/</loc>
+  </url>
+  
+</urlset>
