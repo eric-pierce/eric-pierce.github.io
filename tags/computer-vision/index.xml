@@ -8,12 +8,13 @@
     <language>en</language>
     <lastBuildDate>Wed, 02 Dec 2020 18:59:50 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/tags/computer-vision/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mask Detection</title>
+      <title>Mask Detection with the COVID-Bouncer</title>
       <link>https://eric-pierce.com/posts/mask-detection/</link>
       <pubDate>Wed, 02 Dec 2020 18:59:50 -0600</pubDate>
       
       <guid>https://eric-pierce.com/posts/mask-detection/</guid>
-      <description></description>
+      <description>Overview Mask wearing is a simple and powerful way to combat COVID, but it is most effective when practiced at scale within populations. Unfortunately mask wearing has become politicized in the United States, and businesses are often in the position of policing and enforcing mask wearing themselves.
+Enter the COVID Bouncer - an application which can be used to detect mask wearing without needing to put a real person at risk of exposure.</description>
     </item>
     
   </channel>
