@@ -200,13 +200,13 @@
 <h3 id="model-architecture">Model Architecture</h3>
 <p>I evaluated two training methods as part of this model development. Both models were trained for 18,000 iterations, which took ~14 hours per model. I used <a href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss">loss as an evaluation measure</a> for both models, which is an indicator of how far off from correct prediction a model is for a single example.</p>
 <p>First I trained a Full Network (non-Transfer Learning) with an architecture based on YOLOv2:</p>
-<p><img src="https://github.com/eric-pierce/COVID-Bouncer/blob/main/images/fullnetwork_architecture.png" alt="Full Network Architecture" width="387" height="294" /></p>
+<p><img src="https://eric-pierce.com/img/2020/12/fullnetwork_architecture.png" alt="Full Network Architecture" width="387" height="294" /></p>
 <p>The Full Network training results are below, and resulted in a loss of 1.355</p>
-<p><img src="https://github.com/eric-pierce/COVID-Bouncer/blob/main/images/fullnetwork_training_graph.png" alt="Full Network Training" width="813" height="297" /></p>
+<p><img src="https://eric-pierce.com/img/2020/12/fullnetwork_training_graph.png" alt="Full Network Training" width="813" height="297" /></p>
 <p>Second I trained a Transfer Network based on Apple&rsquo;s &ldquo;Object Vision Feature Print&rdquo;:</p>
-<p><img src="https://github.com/eric-pierce/COVID-Bouncer/blob/main/images/transfernetwork_architecture.png" alt="Transfer Network Architecture" width="387" height="294" /></p>
+<p><img src="https://eric-pierce.com/img/2020/12/transfernetwork_architecture.png" alt="Transfer Network Architecture" width="387" height="294" /></p>
 <p>The Transfer Network training results are below, and resulted in a loss of 0.31</p>
-<p><img src="https://github.com/eric-pierce/COVID-Bouncer/blob/main/images/transfernetwork_training_graph.png" alt="Transfer Network Training" width="813" height="297" /></p>
+<p><img src="https://eric-pierce.com/img/2020/12/transfernetwork_training_graph.png" alt="Transfer Network Training" width="813" height="297" /></p>
 <h3 id="deployment">Deployment</h3>
 <p>I used my personal iPhone as my Edge Device. Modern iPhones include a specialized chip for Neural Network processing. I built my iPhone app using a framework available on <a href="https://github.com/tombaranowicz/ObjectDetectionWithCreateML">GitHub here</a>. This framework was an excellent starting point, but I modified the application code to:</p>
 <ul>
