@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.79.0" /><meta property="og:site_name" content="eric-pierce.com">
+<meta name="generator" content="Hugo 0.76.5" /><meta property="og:site_name" content="eric-pierce.com">
   <meta property="og:title" content="Building A Personal Cloud">
   <meta property="og:description" content="Data Science, Projects, Travel and More">
   <meta property="description" content="Data Science, Projects, Travel and More">
@@ -163,9 +163,31 @@
     </div>
     <div class="content">
       <a href="/posts/building-a-personal-cloud/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/11/docker.jpg');">
-    <img class="stretchV" src="https://eric-pierce.com/img/2020/11/docker.jpg" alt="Docker">
+    <img class="stretchH" src="https://eric-pierce.com/img/2020/11/docker.jpg" alt="Docker">
   </a>
-      <p>In 2019 I began to replace services that I use and which use my data with services I can host on a personal Virtual Private Server, and have complete control of the data. In 2020 I went through a migration from Traefik 1.7 to 2.3, and took the opportunity to completely revamp my self hosting approach, applications, best practices, security, and more. I&rsquo;m hosting everything on a Contabo VPS and on a local Raspberry Pi.</p>
+      <p>Like many others, I have numerous services which I use frequently for work, fun, productivity, and more. While using third party services is the easiest and fastest way to fulill a need, it is far from the most privacy friendly, or depending on your view the most secure. I decided that I wanted to change that, and in 2019 I began to replace third party hosted services with services I can host on a personal Virtual Private Server, and have complete control of the data. Below is a summary of the replacements I made:</p>
+<p><strong>Self-Hosted - Cloud</strong></p>
+<ul>
+<li>Google Contacts | Nextcloud Contacts</li>
+<li>Google Calendar | Nextcloud Calendar</li>
+<li>Dropbox | Nextcloud / Cryptomator</li>
+<li>iCloud Notes | Standardnotes</li>
+<li>Text File | Nextcloud Tasks / 2do</li>
+<li>Lastpass | Bitwarden_rs</li>
+<li>Pocket | Wallabag</li>
+<li>Feedly | TT-RSS</li>
+<li>Nothing | Firefox Sync Server</li>
+<li>Nothing | Restic Backup to Backblaze</li>
+</ul>
+<p><strong>Self-Hosted - Local</strong></p>
+<ul>
+<li>Nothing | PiHole + Unbound + DoH</li>
+<li>Nothing | PiVPN - Wireguard</li>
+<li>iCloud Computer Backup | NAS Time Machine</li>
+<li>Amazon Cloudcam | DaFang Hacks / VLC / Telegram</li>
+</ul>
+<p>I also took this opportunity to move from Gmail to ProtonMail for email. While email can be self-hosted as well, I felt that swapping the very privacy-unfriendly Google service for a trusted encrypted solutions provider (ProtonMail) met my goal.</p>
+<p>In 2020 I went through a migration from Traefik 1.7 to 2.3, and took the opportunity to completely revamp my self hosting approach, applications, best practices, security, and more. I&rsquo;m hosting everything on a Contabo VPS and on a local Raspberry Pi.</p>
 <p><strong>Local Raspberry Pi</strong></p>
 <ul>
 <li><a href="https://nlnetlabs.nl/projects/unbound/about/">Unbound</a> - Local recursive DNS resolver</li>
@@ -192,30 +214,27 @@
 <li><a href="https://mariadb.org/">MariaDB</a> - Open source MySQL server for applications which don&rsquo;t support my preferred SQL server, Postgres</li>
 <li><a href="https://www.postgresql.org/">Postgres</a> - Open source SQL server for applications which it</li>
 <li><a href="https://redis.io/">Redis</a> - Memcache to speed up Nextcloud</li>
+<li><a href="https://github.com/djmaze/resticker">Restic/Resticker</a> - This is a docker image which contains a parameterized version of Restic, for automated, encrypted, incremental backups. I&rsquo;m backing up to a Backblaze B2 bucket which is low cost and use based.</li>
 </ul>
 <p><strong>Open-web accessible applications</strong></p>
 <ul>
 <li><a href="https://traefik.io/">Traefik 2.3</a> - used for reverse proxying open-web applications</li>
 <li><a href="https://github.com/mozilla-services/syncserver">Firefox Syncserver</a> (MariaDB) - this is in the process of being moved to Rust, but that image isn&rsquo;t ready yet. Still using the old python 2.7 version to sync browser settings, extension lists, and bookmarks</li>
-<li><a href="https://www.wallabag.it/en">Wallabag</a> (MariaDB) - Pocket replacement, this integrates very well with iOS and allows me to &ldquo;stash&rdquo; anything I come across on twitter, reddit, browsing, and more. I also have Wallabag set up as an RSS feed so when I stash something it shows up in my RSS reader</li>
+<li><a href="https://www.wallabag.it/en">Wallabag</a> (MariaDB) - Pocket replacement, this integrates very well with iOS and allows me to &ldquo;stash&rdquo; anything I come across on twitter, reddit, browsing, and more. I also have Wallabag set up as an RSS feed so when I stash something it shows up in my RSS reader. In the near future I&rsquo;ll migrate this from MariaDB to Postgres</li>
 <li><a href="https://nextcloud.com">Nextcloud</a> (Postgres) - primarily used as Google replacement, and I use it for Contacts, Calendar, Google Drive, and Tasks/ToDo hosting</li>
 <li>Nextcloud-Cron - the same Nextcloud image but manages the &ldquo;maintenance&rdquo; jobs for Nextcloud without needing to schedule cron jobs on the host</li>
 <li><a href="https://github.com/linuxserver/docker-wireguard">Wireguard</a> - allows me to access internal services via VPN. This is one of the few &ldquo;unofficial&rdquo; images as I don&rsquo;t think wireguard hosts an official one</li>
 <li><a href="https://tt-rss.org/">Tiny-Tiny-RSS</a> (Postgres) - Last year the developer created official docker images, so I moved from an unofficially maintained one to the official ones. This consists of a backend and frontend component, as well as an updater cron job. I much prefer this approach as the unofficial image wasn&rsquo;t static, and was just an older docker image that pulled the latest version of the app from Git.</li>
 <li><a href="https://github.com/dani-garcia/bitwarden_rs">Bitwarden_rs</a> (Postgres) - This is the unofficial bitwarden api/backend/frontend implementation in Rust. I moved from the default sqlite backend to a postgres backend and found that it is now much speedier when updating folders</li>
-<li><a href="https://github.com/standardnotes/syncing-server">Standardnotes Sync Server</a> - This is the official backend for standardnotes. I looked at the Go implementation as well (standardfile) but already had this running so didn&rsquo;t switch over. This is a new service for me as I was using the Nextcloud Notes before, but wasn&rsquo;t happy with the mobile app experience (manual sync over webdav in the Notebooks app). The official iOS app is just as seamless as the native iPhone notes app.</li>
+<li><a href="https://github.com/standardnotes/syncing-server">Standardnotes Sync Server</a> (MariaDB) - This is the official backend for standardnotes. I looked at the Go implementation as well (standardfile) but already had this running so didn&rsquo;t switch over. This is a new service for me as I was using the Nextcloud Notes before, but wasn&rsquo;t happy with the mobile app experience (manual sync over webdav in the Notebooks app). The official iOS app is just as seamless as the native iPhone notes app.</li>
 <li><a href="https://github.com/standardnotes/web">Standardnotes Web App</a> - the web frontend for standardnotes</li>
 <li><a href="https://github.com/sentriz/standardnotes-extensions">Standardnotes Extensions</a> - This is a docker image which contains all the open source extensions for standardnotes. It&rsquo;s very simple to run, and lets you use several high powered extensions all self-hosted</li>
-</ul>
-<p>Services I&rsquo;m working on adding now:</p>
-<ul>
-<li>Some kind of backup solution - I was looking at <a href="https://hub.docker.com/r/blacklabelops/volumerize/">Volumerize</a> for encrypted backups to my <a href="https://rsync.net">rsync.net</a> account, but it appears that <a href="https://github.com/blacklabelops/volumerize/issues/59">the repo is going to be deprecated</a> at some point in the near future</li>
 </ul>
 <p>Services I&rsquo;m considering adding in the future:</p>
 <ul>
 <li>Authelia SSO</li>
 <li>Bookstack</li>
-<li>Apache Guacamole</li>
+<li>MeshCentral</li>
 <li>Papermerge</li>
 <li>Monica CRM</li>
 <li>fail2ban - may move it into a container</li>
@@ -277,7 +296,7 @@
       
       <article class="mini-post">
           <a href="/posts/building-a-personal-cloud/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/11/docker.jpg');">
-    <img class="stretchV" src="https://eric-pierce.com/img/2020/11/docker.jpg" alt="Docker">
+    <img class="stretchH" src="https://eric-pierce.com/img/2020/11/docker.jpg" alt="Docker">
   </a>
         <header>
           <h2><a href="/posts/building-a-personal-cloud/">Building A Personal Cloud</a></h2>
