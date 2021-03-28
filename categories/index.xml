@@ -6,22 +6,22 @@
     <description>Recent content in Categories on eric-pierce.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 31 Jan 2021 17:16:19 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>self-hosting</title>
-      <link>https://eric-pierce.com/categories/self-hosting/</link>
-      <pubDate>Sun, 31 Jan 2021 17:16:19 -0600</pubDate>
-      
-      <guid>https://eric-pierce.com/categories/self-hosting/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Wed, 02 Dec 2020 18:59:50 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>data-science</title>
       <link>https://eric-pierce.com/categories/data-science/</link>
       <pubDate>Wed, 02 Dec 2020 18:59:50 -0600</pubDate>
       
       <guid>https://eric-pierce.com/categories/data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>self-hosting</title>
+      <link>https://eric-pierce.com/categories/self-hosting/</link>
+      <pubDate>Sat, 28 Nov 2020 17:16:19 -0600</pubDate>
+      
+      <guid>https://eric-pierce.com/categories/self-hosting/</guid>
       <description></description>
     </item>
     

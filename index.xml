@@ -6,17 +6,7 @@
     <description>Recent content on eric-pierce.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 31 Jan 2021 17:16:19 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Open Sourcing BIOS with Coreboot</title>
-      <link>https://eric-pierce.com/posts/coreboot/</link>
-      <pubDate>Sun, 31 Jan 2021 17:16:19 -0600</pubDate>
-      
-      <guid>https://eric-pierce.com/posts/coreboot/</guid>
-      <description>I&amp;rsquo;m often the default &amp;ldquo;recycler&amp;rdquo; for old tech from friends and family, which means that I have a healthy pile of phones, computers, kindles, and more, most of which end up in the hands of others when their devices break or when I can help them out with a free upgrade.
-A few years ago I inherited an old Lenovo W530 laptop from a parent who upgraded to a new mac, and I knew exactly what I had in mind for it - a new &amp;ldquo;brain&amp;rdquo; for the arcade machine (MAME Machine) I built back in undergrad.</description>
-    </item>
-    
+    <lastBuildDate>Wed, 02 Dec 2020 18:59:50 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mask Detection with CreateML</title>
       <link>https://eric-pierce.com/posts/mask-detection/</link>
