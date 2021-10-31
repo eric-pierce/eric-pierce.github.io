@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://eric-pierce.com/posts/compiling-nextcloud-for-apple-silicon/</loc>
+    <lastmod>2021-10-31T12:48:21-05:00</lastmod>
+  </url><url>
+    <loc>https://eric-pierce.com/</loc>
+    <lastmod>2021-10-31T12:48:21-05:00</lastmod>
+  </url><url>
+    <loc>https://eric-pierce.com/posts/</loc>
+    <lastmod>2021-10-31T12:48:21-05:00</lastmod>
+  </url><url>
     <loc>https://eric-pierce.com/categories/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
   </url><url>
@@ -17,13 +26,7 @@
     <loc>https://eric-pierce.com/tags/deep-learning/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
   </url><url>
-    <loc>https://eric-pierce.com/</loc>
-    <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url><url>
     <loc>https://eric-pierce.com/posts/mask-detection/</loc>
-    <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url><url>
-    <loc>https://eric-pierce.com/posts/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
   </url><url>
     <loc>https://eric-pierce.com/tags/</loc>
