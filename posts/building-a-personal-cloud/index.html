@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.76.5" /><meta property="og:site_name" content="eric-pierce.com">
+<meta name="generator" content="Hugo 0.88.1" /><meta property="og:site_name" content="eric-pierce.com">
   <meta property="og:title" content="Building A Personal Cloud">
   <meta property="og:description" content="Data Science, Projects, Travel and More">
   <meta property="description" content="Data Science, Projects, Travel and More">
@@ -18,7 +18,7 @@
       <meta property="og:image:alt" content="Docker">
     
   
-  <link rel="stylesheet" href="/css/bundle.min.8cd619c840a832cf108d8d040c9c7a9a107d3af075e909cc444f777182d33cda.css" integrity="sha256-jNYZyECoMs8QjY0EDJx6mhB9OvB16QnMRE93cYLTPNo="><link rel="stylesheet" href="/css/add-on.css">
+  <link rel="stylesheet" href="/css/bundle.min.7cdce121722612f5e57186408fe92a0751085a7539c0fe3d61e2ab84251cc850.css" integrity="sha256-fNzhIXImEvXlcYZAj&#43;kqB1EIWnU5wP49YeKrhCUcyFA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -42,17 +42,17 @@
       
         
           
-          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+          <a href="/about" class="nav link"><i class='far fa-id-card'></i> About</a>
         
       
         
           
-          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+          <a href="/categories" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
         
       
         
           
-          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+          <a href="/contact" class="nav link"><i class='far fa-envelope'></i> Contact</a>
         
       
       
@@ -131,8 +131,9 @@
 
       <main id="site-main">
         
-  <article class="post">
-    <header>
+  <article>
+    <div class="post">
+      <header>
   <div class="title">
     
       <h2><a href="/posts/building-a-personal-cloud/">Building A Personal Cloud</a></h2>
@@ -140,14 +141,14 @@
     
   </div>
   <div class="meta">
-    <time datetime="2020-11-28 17:16:19 -0600 CST">November 28, 2020</time>
+    <time datetime="2020-11-28 17:16:19 -0600 -0600">November 28, 2020</time>
     
-    <p>5-Minute Read</p>
+    <p>6-Minute Read</p>
   </div>
 </header>
 
-    <div id="socnet-share">
-      
+      <div id="socnet-share">
+        
 
 
 
@@ -155,12 +156,12 @@
   
 
 
-    </div>
-    <div class="content">
-      <a href="/posts/building-a-personal-cloud/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/11/docker.jpg');">
+      </div>
+      <div class="content">
+        <a href="/posts/building-a-personal-cloud/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/11/docker.jpg');">
     <img class="stretchH" src="https://eric-pierce.com/img/2020/11/docker.jpg" alt="Docker">
   </a>
-      <p>Like many others, I have numerous services which I use frequently for work, fun, productivity, and more. While using third party services is the easiest and fastest way to fulill a need, it is far from the most privacy friendly, or depending on your view the most secure. I decided that I wanted to change that, and in 2019 I began to replace third party hosted services with services I can host on a personal Virtual Private Server, and have complete control of the data. Below is a summary of the replacements I made:</p>
+        <p>Like many others, I have numerous services which I use frequently for work, fun, productivity, and more. While using third party services is the easiest and fastest way to fulfill a need, it is far from the most privacy friendly, or depending on your view the most secure. I decided that I wanted to change that, and in 2019 I began to replace third party hosted services with services I can host on a personal Virtual Private Server, and have complete control of the data. Below is a summary of the replacements I made:</p>
 <p><strong>Self-Hosted - Cloud</strong></p>
 <ul>
 <li>Google Contacts | Nextcloud Contacts</li>
@@ -171,8 +172,10 @@
 <li>Lastpass | Bitwarden_rs</li>
 <li>Pocket | Wallabag</li>
 <li>Feedly | TT-RSS</li>
+<li>TeamViewer | MeshCentral</li>
 <li>Nothing | Firefox Sync Server</li>
 <li>Nothing | Restic Backup to Backblaze</li>
+<li>Nothing | Tandoor Recipes</li>
 </ul>
 <p><strong>Self-Hosted - Local</strong></p>
 <ul>
@@ -182,7 +185,7 @@
 <li>Amazon Cloudcam | DaFang Hacks / VLC / Telegram</li>
 </ul>
 <p>I also took this opportunity to move from Gmail to ProtonMail for email. While email can be self-hosted as well, I felt that swapping the very privacy-unfriendly Google service for a trusted encrypted solutions provider (ProtonMail) met my goal.</p>
-<p>In 2020 I went through a migration from Traefik 1.7 to 2.3, and took the opportunity to completely revamp my self hosting approach, applications, best practices, security, and more. I&rsquo;m hosting everything on a Contabo VPS and on a local Raspberry Pi.</p>
+<p>In 2020 I went through a migration from Traefik 1.7 to 2.4, and took the opportunity to completely revamp my self hosting approach, applications, best practices, security, and more. I&rsquo;m hosting everything on a Contabo VPS and on a local Raspberry Pi.</p>
 <p><strong>Local Raspberry Pi</strong></p>
 <ul>
 <li><a href="https://nlnetlabs.nl/projects/unbound/about/">Unbound</a> - Local recursive DNS resolver</li>
@@ -200,7 +203,7 @@
 <li><a href="https://www.portainer.io/">Portainer</a> - Docker Management</li>
 <li><a href="https://www.phpmyadmin.net/">PhpMyAdmin</a> - Management of a MariaDB database for applications which don&rsquo;t support Postgres</li>
 <li><a href="https://www.pgadmin.org/">PgAdmin</a> - Management of a Postgres database for any applications which do support Postgres</li>
-<li><a href="https://github.com/joeferner/redis-commander">Redis Commander</a> - for managing my Redis Memcache installation to speed up Nextcloud</li>
+<li><a href="https://github.com/joeferner/redis-commander">Redis Commander</a> (Currently Disabled) - for managing my Redis Memcache installation to speed up Nextcloud</li>
 </ul>
 <p><strong>Non-Open-web accessible applications</strong></p>
 <ul>
@@ -213,31 +216,37 @@
 </ul>
 <p><strong>Open-web accessible applications</strong></p>
 <ul>
-<li><a href="https://traefik.io/">Traefik 2.3</a> - used for reverse proxying open-web applications</li>
-<li><a href="https://github.com/mozilla-services/syncserver">Firefox Syncserver</a> (MariaDB) - this is in the process of being moved to Rust, but that image isn&rsquo;t ready yet. Still using the old python 2.7 version to sync browser settings, extension lists, and bookmarks</li>
-<li><a href="https://www.wallabag.it/en">Wallabag</a> (MariaDB) - Pocket replacement, this integrates very well with iOS and allows me to &ldquo;stash&rdquo; anything I come across on twitter, reddit, browsing, and more. I also have Wallabag set up as an RSS feed so when I stash something it shows up in my RSS reader. In the near future I&rsquo;ll migrate this from MariaDB to Postgres</li>
+<li><a href="https://traefik.io/">Traefik 2.4</a> - used for reverse proxying open-web applications</li>
+<li><a href="https://github.com/mozilla-services/syncserver">Firefox Syncserver</a> (MariaDB) - this is in the process of being moved to Rust, but that image isn&rsquo;t ready yet. Still using the old python 2.7 version to sync browser settings, extension lists, and bookmarks.</li>
+<li><a href="https://www.wallabag.it/en">Wallabag</a> (Postgres) - Pocket replacement, this integrates very well with iOS and allows me to &ldquo;stash&rdquo; anything I come across on twitter, reddit, browsing, and more. I also have Wallabag set up as an RSS feed so when I stash something it shows up in my RSS reader.</li>
 <li><a href="https://nextcloud.com">Nextcloud</a> (Postgres) - primarily used as Google replacement, and I use it for Contacts, Calendar, Google Drive, and Tasks/ToDo hosting</li>
-<li>Nextcloud-Cron - the same Nextcloud image but manages the &ldquo;maintenance&rdquo; jobs for Nextcloud without needing to schedule cron jobs on the host</li>
 <li><a href="https://github.com/linuxserver/docker-wireguard">Wireguard</a> - allows me to access internal services via VPN. This is one of the few &ldquo;unofficial&rdquo; images as I don&rsquo;t think wireguard hosts an official one</li>
 <li><a href="https://tt-rss.org/">Tiny-Tiny-RSS</a> (Postgres) - Last year the developer created official docker images, so I moved from an unofficially maintained one to the official ones. This consists of a backend and frontend component, as well as an updater cron job. I much prefer this approach as the unofficial image wasn&rsquo;t static, and was just an older docker image that pulled the latest version of the app from Git.</li>
-<li><a href="https://github.com/dani-garcia/bitwarden_rs">Bitwarden_rs</a> (Postgres) - This is the unofficial bitwarden api/backend/frontend implementation in Rust. I moved from the default sqlite backend to a postgres backend and found that it is now much speedier when updating folders</li>
-<li><a href="https://github.com/standardnotes/syncing-server">Standardnotes Sync Server</a> (MariaDB) - This is the official backend for standardnotes. I looked at the Go implementation as well (standardfile) but already had this running so didn&rsquo;t switch over. This is a new service for me as I was using the Nextcloud Notes before, but wasn&rsquo;t happy with the mobile app experience (manual sync over webdav in the Notebooks app). The official iOS app is just as seamless as the native iPhone notes app.</li>
+<li><a href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a> (Postgres) - This is the unofficial bitwarden api/backend/frontend implementation in Rust. I moved from the default sqlite backend to a postgres backend and found that it is now much speedier when updating folders</li>
+<li><a href="https://github.com/standardnotes/standalone">Standardnotes Sync Server</a> (MariaDB) - This is the official backend implementation for standardnotes. I was using the Nextcloud Notes before, but wasn&rsquo;t happy with the mobile app experience (manual sync over webdav in the Notebooks app). The official iOS app is just as seamless as the native iPhone notes app. This backend server was recently re-written in JavaScript (previously Ruby on Rails). I am not using the recommended &ldquo;script&rdquo; based implementation here as I prefer more control over containers and architecture, so I&rsquo;ve implemented the standalone containers directly in my docker-compose file.</li>
 <li><a href="https://github.com/standardnotes/web">Standardnotes Web App</a> - the web frontend for standardnotes</li>
-<li><a href="https://github.com/sentriz/standardnotes-extensions">Standardnotes Extensions</a> - This is a docker image which contains all the open source extensions for standardnotes. It&rsquo;s very simple to run, and lets you use several high powered extensions all self-hosted</li>
+<li><a href="https://github.com/eric-pierce/standardnotes-extension-server">Standardnotes Extensions</a> - This is a docker image which contains all the open source extensions for standardnotes. It&rsquo;s very simple to run, and lets you use several high powered extensions all self-hosted. I forked this and added additional themes and services.</li>
+<li><a href="https://github.com/Ylianst/MeshCentral">MeshCentral</a> - This is a complete replacement for TeamViewer, and enables remote access to my devices without needing to use a third party service. The only downside I&rsquo;ve found here is that there isn&rsquo;t a native mobile app.</li>
+<li><a href="https://github.com/vabene1111/recipes">Tandoor Recipes</a> - App for self-hosting and sharing recipes. With family members spread out this is a great way to connect around favorite recipes and meal planning.</li>
 </ul>
 <p>Services I&rsquo;m considering adding in the future:</p>
 <ul>
-<li>Authelia SSO</li>
 <li>Bookstack</li>
-<li>MeshCentral</li>
+<li>Papermerge</li>
+<li>Monica CRM</li>
+<li>fail2ban - may move it into a container</li>
+</ul>
+<p>Services I&rsquo;m considering adding in the future:</p>
+<ul>
+<li>Bookstack</li>
 <li>Papermerge</li>
 <li>Monica CRM</li>
 <li>fail2ban - may move it into a container</li>
 </ul>
 
-    </div>
-    <footer>
-      <div class="stats">
+      </div>
+      <footer>
+        <div class="stats">
   
     <ul class="categories">
       
@@ -258,12 +267,13 @@
   
 </div>
 
-    </footer>
-  </article>
-  
+      </footer>
+    </div>
     
+      
 
-  
+    
+  </article>
   <div class="pagination">
     
       <a href="/posts/mask-detection/" class="button left"><span>Mask Detection with CreateML</span></a>
@@ -285,7 +295,7 @@
   </a>
         <header>
           <h2><a href="/posts/mask-detection/">Mask Detection with CreateML</a></h2>
-          <time class="published" datetime="2020-12-02 18:59:50 -0600 CST">December 2, 2020</time>
+          <time class="published" datetime="2020-12-02 18:59:50 -0600 -0600">December 2, 2020</time>
         </header>
       </article>
       
@@ -295,7 +305,7 @@
   </a>
         <header>
           <h2><a href="/posts/building-a-personal-cloud/">Building A Personal Cloud</a></h2>
-          <time class="published" datetime="2020-11-28 17:16:19 -0600 CST">November 28, 2020</time>
+          <time class="published" datetime="2020-11-28 17:16:19 -0600 -0600">November 28, 2020</time>
         </header>
       </article>
       
@@ -397,7 +407,7 @@
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b4e669fa428a81defb8af0916c53f39cd1b8e0bbab22199c06f0b182907ba474.js" integrity="sha256-tOZp&#43;kKKgd77ivCRbFPznNG44LurIhmcBvCxgpB7pHQ="></script>
+    <script>hljs.highlightAll();</script><script src="/js/bundle.min.e673ae33a2fdd48831144b81798aadeed6cd646dff02d0a56c9a6ddfb7b1e37e.js" integrity="sha256-5nOuM6L91IgxFEuBeYqt7tbNZG3/AtClbJpt37ex434="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

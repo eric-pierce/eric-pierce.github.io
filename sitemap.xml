@@ -1,74 +1,46 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://eric-pierce.com/categories/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/tags/computer-vision/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/tags/covid-19/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/categories/data-science/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/tags/deep-learning/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/posts/mask-detection/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/posts/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/tags/</loc>
     <lastmod>2020-12-02T18:59:50-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/posts/building-a-personal-cloud/</loc>
     <lastmod>2020-11-28T17:16:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/tags/docker/</loc>
     <lastmod>2020-11-28T17:16:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/categories/self-hosting/</loc>
     <lastmod>2020-11-28T17:16:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/about/</loc>
     <lastmod>2020-11-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://eric-pierce.com/contact/</loc>
   </url>
-  
 </urlset>
