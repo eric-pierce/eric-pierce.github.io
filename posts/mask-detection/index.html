@@ -14,7 +14,7 @@
   <meta property="og:type" content="article">
   
     
-      <meta property="og:image" content="https://eric-pierce.com/img/2020/12/masktitle.png">
+      <meta property="og:image" content="https://eric-pierce.com/img/2020/12/masktitle.jpg">
       <meta property="og:image:alt" content="Mask Detection">
     
   
@@ -158,16 +158,16 @@
 
       </div>
       <div class="content">
-        <a href="/posts/mask-detection/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/12/masktitle.png');">
-    <img class="stretchV" src="https://eric-pierce.com/img/2020/12/masktitle.png" alt="Mask Detection">
+        <a href="/posts/mask-detection/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/12/masktitle.jpg');">
+    <img class="stretchV" src="https://eric-pierce.com/img/2020/12/masktitle.jpg" alt="Mask Detection">
   </a>
         <h3 id="overview">Overview</h3>
 <p>Mask wearing is a simple and powerful way to combat COVID, but it is most effective when practiced at scale within populations. Unfortunately mask wearing has become politicized in the United States, and businesses are often in the position of policing and enforcing mask wearing themselves.</p>
 <p>Enter the <a href="https://github.com/eric-pierce/COVID-Bouncer">COVID Bouncer</a> - an application which can be used to detect mask wearing without needing to put a real person at risk of exposure. When paired with a door lock, the COVID Bouncer can detect the presence of face masks before allowing entry into a business.</p>
 <p>The Bouncer is able to identify people not wearing masks as well as those wearing masks:</p>
-<p><img src="https://eric-pierce.com/img/2020/12/shot3.png" alt="Example 3" width="288" height="623" /> <img src="https://eric-pierce.com/img/2020/12/shot5.png" alt="Example 2" width="288" height="623" /></p>
+<p><img src="/img/2020/12/shot3.jpg" alt="Example 3" width="288" height="623" /> <img src="/img/2020/12/shot5.jpg" alt="Example 2" width="288" height="623" /></p>
 <p>It also functions with images that include multiple subjects as can be seen in the examples below:</p>
-<p><img src="https://eric-pierce.com/img/2020/12/shot1.png" alt="Example 1" width="288" height="623" /> <img src="https://eric-pierce.com/img/2020/12/shot4.png" alt="Example 4" width="288" height="623" /></p>
+<p><img src="/img/2020/12/shot1.jpg" alt="Example 1" width="288" height="623" /> <img src="/img/2020/12/shot4.jpg" alt="Example 4" width="288" height="623" /></p>
 <h3 id="tools-used">Tools Used</h3>
 <p>This project was built using Apple&rsquo;s development stack, including their <a href="https://developer.apple.com/machine-learning/create-ml/">CreateML</a> framework.</p>
 <ul>
@@ -196,13 +196,13 @@
 <h3 id="model-architecture">Model Architecture</h3>
 <p>I evaluated two training methods as part of this model development. Both models were trained for 18,000 iterations, which took ~14 hours per model. I used <a href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss">loss as an evaluation measure</a> for both models, which is an indicator of how far off from correct prediction a model is for a single example.</p>
 <p>First I trained a Full Network (non-Transfer Learning) with an architecture based on YOLOv2:</p>
-<p><img src="https://eric-pierce.com/img/2020/12/fullnetwork_architecture.png" alt="Full Network Architecture" width="387" height="294" /></p>
+<p><img src="/img/2020/12/fullnetwork_architecture.jpg" alt="Full Network Architecture" width="387" height="294" /></p>
 <p>The Full Network training results are below, and resulted in a loss of 1.355</p>
-<p><img src="https://eric-pierce.com/img/2020/12/fullnetwork_training_graph.png" alt="Full Network Training" width="813" height="297" /></p>
+<p><img src="/img/2020/12/fullnetwork_training_graph.jpg" alt="Full Network Training" width="813" height="297" /></p>
 <p>Second I trained a Transfer Network based on Apple&rsquo;s &ldquo;Object Vision Feature Print&rdquo;:</p>
-<p><img src="https://eric-pierce.com/img/2020/12/transfernetwork_architecture.png" alt="Transfer Network Architecture" width="387" height="294" /></p>
+<p><img src="/img/2020/12/transfernetwork_architecture.jpg" alt="Transfer Network Architecture" width="387" height="294" /></p>
 <p>The Transfer Network training results are below, and resulted in a loss of 0.31</p>
-<p><img src="https://eric-pierce.com/img/2020/12/transfernetwork_training_graph.png" alt="Transfer Network Training" width="813" height="297" /></p>
+<p><img src="/img/2020/12/transfernetwork_training_graph.jpg" alt="Transfer Network Training" width="813" height="297" /></p>
 <h3 id="deployment">Deployment</h3>
 <p>I used my personal iPhone as my Edge Device. Modern iPhones include a specialized chip for Neural Network processing. I built my iPhone app using a framework available on <a href="https://github.com/tombaranowicz/ObjectDetectionWithCreateML">GitHub here</a>. This framework was an excellent starting point, but I modified the application code to:</p>
 <ul>
@@ -264,8 +264,8 @@
       </header>
       
       <article class="mini-post">
-          <a href="/posts/mask-detection/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/12/masktitle.png');">
-    <img class="stretchV" src="https://eric-pierce.com/img/2020/12/masktitle.png" alt="Mask Detection">
+          <a href="/posts/mask-detection/" class="image" style="--bg-image: url('https://eric-pierce.com/img/2020/12/masktitle.jpg');">
+    <img class="stretchV" src="https://eric-pierce.com/img/2020/12/masktitle.jpg" alt="Mask Detection">
   </a>
         <header>
           <h2><a href="/posts/mask-detection/">Mask Detection with CreateML</a></h2>
