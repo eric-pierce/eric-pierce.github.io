@@ -199,7 +199,7 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#66d9ef">mkdir</span> build
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#66d9ef">cd</span> build
 </code></pre></div><p>Then build the binary:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cmake .. -DCMAKE_INSTALL_PREFIX=~/ncbuild/qt5-5.15-macOS-release/qtbase -DCMAKE_BUILD_TYPE=Release -DBUILD_TRANSLATIONS=OFF
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cmake .. -DCMAKE_INSTALL_PREFIX=~/ncsilicon/qt5-5.15-macOS-release/qtbase -DCMAKE_BUILD_TYPE=Release -DBUILD_TRANSLATIONS=OFF
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>make install
 </code></pre></div><h3 id="6-build-nextcloud-apple-silicon">6. Build Nextcloud Apple Silicon</h3>
 <p>Now that we have installed the dependencies from Homebrew, and compiled Apple Silicon versions of Qt5 and Qtkeychain, we&rsquo;re ready to build the Nextcloud desktop app.</p>
@@ -211,9 +211,9 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#66d9ef">cd</span> build
 </code></pre></div><p>We need to set up environment variables for the build. You should be able to just copy and paste the below into your terminal:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>export OPENSSL_ROOT_DIR=$(brew --prefix openssl@1.1)
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>export Qt5LinguistTools_DIR=~/ncbuild/qt5-5.15-macOS-release/qtbase
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>export Qt5_DIR=~/ncbuild/qt5-5.15-macOS-release/qtbase
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>export Qt5Keychain_DIR=~/ncbuild/qt5-5.15-macOS-release/qtbase/lib/cmake/Qt5Keychain
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>export Qt5LinguistTools_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>export Qt5_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>export Qt5Keychain_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase/lib/cmake/Qt5Keychain
 </code></pre></div><p>Now its build time. This will take a little time but nothing too long:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cmake .. -DCMAKE_INSTALL_PREFIX=/Applications -DCMAKE_BUILD_TYPE=Release
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>make -j10
