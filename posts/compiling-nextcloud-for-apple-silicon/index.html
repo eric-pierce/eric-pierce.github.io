@@ -174,21 +174,21 @@
 </code></pre></div><h3 id="3-install-dependencies-from-homebrew">3. Install Dependencies from Homebrew</h3>
 <p>Homebrew will save us from having to compile many the dependencies manually. While a few folks on the <a href="https://github.com/nextcloud/desktop/issues/2659">Github issue thread discussing this</a> took the extra step of compiling openssl from scratch, we can just use the 1.1 version available through Homebrew. Additionally, it looks like some people were running a version of Inkscape through Rosetta for icon generation. Inkscape is actually syntax compatible with librsvg, which has Apple Silicon out of the box:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>brew install pcre2 harfbuzz freetype cmake librsvg openssl@1.1
-</code></pre></div><h3 id="4-build-qt5-for-apple-silicon">4. Build qt5 for Apple Silicon</h3>
+</code></pre></div><h3 id="4-build-qt5-for-apple-silicon">4. Build Qt5 for Apple Silicon</h3>
 <p>While qt6.2 was just released with native Apple Silicon support, the Nextcloud application isn&rsquo;t yet updated to be compatible with it. Nextcloud still uses Qt5, of which version 5.15 is the latest freely available version before the repository was made private. As there is no apple silicon binary available, we have to build it ourselves.</p>
 <p>Clone the Qt5 repo and check out version 5.15:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>git clone git://code.qt.io/qt/qt5.git
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#66d9ef">cd</span> qt5
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>git clone git://code.qt.io/qt/Qt5.git
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#66d9ef">cd</span> Qt5
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>git checkout 5.15
 </code></pre></div><p>Next we need to pull down all the related modules for the build. This will take a while, and is probably the longest step of this whole process:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>./init-repository
-</code></pre></div><p>The qt5 actually has a missing header we need to add in order for it to compile correctly. This appeared to be ignored by Big Sur&rsquo;s version of the clang compiler (12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>sed -i -e &#39;s/#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/#include &lt;CoreGraphics\/CGColorSpace.h&gt; \n#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/g&#39; ~/ncsilicon/qt5/qtbase/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.h 
+</code></pre></div><p>The Qt5 actually has a missing header we need to add in order for it to compile correctly. This appeared to be ignored by Big Sur&rsquo;s version of the clang compiler (12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>sed -i -e &#39;s/#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/#include &lt;CoreGraphics\/CGColorSpace.h&gt; \n#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/g&#39; ~/ncsilicon/Qt5/qtbase/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.h 
 </code></pre></div><p>Best practice is to build in a different folder than your source code, so the commands below create a new folder and get the stage set for the build:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#66d9ef">cd</span> ..
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#66d9ef">mkdir</span> qt5-5.15-macOS-release
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#66d9ef">cd</span> qt5-5.15-macOS-release
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>../qt5/configure -release -prefix ./qtbase -nomake examples -nomake tests QMAKE_APPLE_DEVICE_ARCHS=arm64 -opensource -confirm-license -skip qt3d -skip qtwebengine
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#66d9ef">mkdir</span> Qt5-5.15-macOS-release
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#66d9ef">cd</span> Qt5-5.15-macOS-release
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>../Qt5/configure -release -prefix ./qtbase -nomake examples -nomake tests QMAKE_APPLE_DEVICE_ARCHS=arm64 -opensource -confirm-license -skip qt3d -skip qtwebengine
 </code></pre></div><p>Assuming no errors are thrown, we&rsquo;re ready to build. This will take a bit, but not as long as initiating the repository did.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>make -j10
 </code></pre></div><h3 id="5-build-qtkeychain-for-apple-silicon">5. Build qtkeychain for Apple Silicon</h3>
@@ -199,7 +199,7 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#66d9ef">mkdir</span> build
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#66d9ef">cd</span> build
 </code></pre></div><p>Then build the binary:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cmake .. -DCMAKE_INSTALL_PREFIX=~/ncbuild/qt5-5.15-macOS-release/qtbase -DCMAKE_BUILD_TYPE=Release -DBUILD_TRANSLATIONS=OFF
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cmake .. -DCMAKE_INSTALL_PREFIX=~/ncbuild/Qt5-5.15-macOS-release/qtbase -DCMAKE_BUILD_TYPE=Release -DBUILD_TRANSLATIONS=OFF
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>make install
 </code></pre></div><h3 id="6-build-nextcloud-apple-silicon">6. Build Nextcloud Apple Silicon</h3>
 <p>Now that we have installed the dependencies from Homebrew, and compiled Apple Silicon versions of Qt5 and Qtkeychain, we&rsquo;re ready to build the Nextcloud desktop app.</p>
@@ -211,9 +211,9 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#66d9ef">cd</span> build
 </code></pre></div><p>We need to set up environment variables for the build. You should be able to just copy and paste the below into your terminal:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>export OPENSSL_ROOT_DIR=$(brew --prefix openssl@1.1)
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>export Qt5LinguistTools_DIR=~/ncbuild/qt5-5.15-macOS-release/qtbase
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>export Qt5_DIR=~/ncbuild/qt5-5.15-macOS-release/qtbase
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>export Qt5Keychain_DIR=~/ncbuild/qt5-5.15-macOS-release/qtbase/lib/cmake/Qt5Keychain
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>export Qt5LinguistTools_DIR=~/ncbuild/Qt5-5.15-macOS-release/qtbase
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>export Qt5_DIR=~/ncbuild/Qt5-5.15-macOS-release/qtbase
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>export Qt5Keychain_DIR=~/ncbuild/Qt5-5.15-macOS-release/qtbase/lib/cmake/Qt5Keychain
 </code></pre></div><p>Now its build time. This will take a little time but nothing too long:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cmake .. -DCMAKE_INSTALL_PREFIX=/Applications -DCMAKE_BUILD_TYPE=Release
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>make -j10
