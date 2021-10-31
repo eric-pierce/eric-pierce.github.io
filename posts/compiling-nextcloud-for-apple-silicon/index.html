@@ -182,7 +182,7 @@
 git checkout 5.15
 </code></pre></div><p>Next we need to pull down all the related modules for the build. This will take a while, and is probably the longest step of this whole process:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">./init-repository
-</code></pre></div><p>The Qt5 actually has a missing header we need to add in order for it to compile correctly. This appeared to be ignored by Big Sur&rsquo;s version of the clang compiler (12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
+</code></pre></div><p>The Qt5 actually has a missing header we need to add in order for it to compile correctly. This appeared to be ignored by Big Sur&rsquo;s version of the Clang compiler (clang 12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">sed -i -e &#39;s/#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/#include &lt;CoreGraphics\/CGColorSpace.h&gt; \n#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/g&#39; ~/ncsilicon/qt5/qtbase/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.h 
 </code></pre></div><p>Best practice is to build in a different folder than your source code, so the commands below create a new folder and get the stage set for the build:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="color:#66d9ef">cd</span> ..
@@ -209,7 +209,7 @@ git clone git@github.com:nextcloud/desktop.git
 <span style="color:#66d9ef">cd</span> desktop
 <span style="color:#66d9ef">mkdir</span> build
 <span style="color:#66d9ef">cd</span> build
-</code></pre></div><p>We need to set up environment variables for the build. You should be able to just copy and paste the below into your terminal:</p>
+</code></pre></div><p>We need to set up environment variables for the build:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">export OPENSSL_ROOT_DIR=$(brew --prefix openssl@1.1)
 export Qt5LinguistTools_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase
 export Qt5_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase
