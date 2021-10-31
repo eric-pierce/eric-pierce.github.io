@@ -220,8 +220,8 @@
 </code></pre></div><p>You should now have a Nextcloud app in ~/ncsilicon/desktop/build/bin/, which you can copy right into your Applications directory. If you want you can also remove the signature from the app:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#66d9ef">cd</span> ~/ncsilicon/desktop/build/bin/
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>codesign --remove-signature --deep --verbose Nextcloud.app
-</code></pre></div><h3 id="7-copy-the-application-to-your-applications-folder">7. Copy the Application to your Applications folder</h3>
-<p>Finally copy the application</p>
+</code></pre></div><h3 id="7-move-your-freshly-built-app-to-the-applications-folder">7. Move your freshly built app to the Applications folder</h3>
+<p>Finally copy the application out to /Applications - you&rsquo;re done!</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>cp ~/ncsilicon/desktop/build/bin/Nextcloud.app /Applications/
 </code></pre></div><p>Go ahead and launch the app and you should be set! If MacOS complains about the app not being from a known developer, hold down the Control button and right click on it, and select &ldquo;Open&rdquo;. It will prompt you with a few &ldquo;are you sure&rdquo; messages but then you&rsquo;re set.</p>
 <h3 id="8-optional---sign-the-application-yourself">8. Optional - Sign the application yourself</h3>
