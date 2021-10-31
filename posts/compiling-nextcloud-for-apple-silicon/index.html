@@ -166,26 +166,26 @@
 <p>Nextcloud, which I use as a partial G-Suite replacement, is still only compiled for Intel based macs which require Rosetta 2 in order to run. This wouldn&rsquo;t be that big of a deal as Rosetta 2 seems to be pretty seamless, but there are several reports of <a href="https://github.com/nextcloud/desktop/issues/2659#issuecomment-830787727">huge amounts of CPU usage</a> by the Intel version of the app. Because Nextcloud is always running in the background, this isn&rsquo;t a &ldquo;once and awhile&rdquo; issue.</p>
 <p>Several enterprising folks with a little help from the Nextcloud team have successfully compiled a version of the Nextcloud app for Apple Silicon. Building on the work they put together in Github thread I was able to get a working installation, but it took some finesse. For anyone who wants to get a version compiled themselves, here are the specific steps I followed:</p>
 <h3 id="1-install-homebrew">1. Install Homebrew</h3>
-<p>If you don&rsquo;t have it installed, open up a terminal and get homebrew, a package manager for MacOS and Linux up and running. More information on Homebrew can be found <a href="https://docs.brew.sh/Installation">here</a>. If you haven&rsquo;t installed homebrew already, you&rsquo;ll get a few prompts to download XCode command line tools, and will have to enter your login password to install:</p>
+<p>If you don&rsquo;t have it installed, open up a terminal and get the excellent package manager homebrew up and running. More information on Homebrew can be found <a href="https://docs.brew.sh/Installation">here</a>. You&rsquo;ll be prompted to download XCode command line tools, and will have to enter your login password to install:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">/bin/bash -c <span style="color:#e6db74">&#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&#34;</span>
 </code></pre></div><h3 id="2-set-up-the-working-directory">2. Set up the working directory</h3>
-<p>Create a folder called ncsilicon in your home directory to build the related packages.</p>
+<p>Create a folder in your home directory to build the related packages:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="color:#66d9ef">mkdir</span> ~/ncsilicon
 </code></pre></div><h3 id="3-install-dependencies-from-homebrew">3. Install Dependencies from Homebrew</h3>
-<p>Homebrew will save us from having to compile many the dependencies manually. While a few folks on the <a href="https://github.com/nextcloud/desktop/issues/2659">Github issue thread discussing this</a> took the extra step of compiling openssl from scratch, we can just use the 1.1 version available through Homebrew. Additionally, it looks like some people were running a version of Inkscape through Rosetta for icon generation. Inkscape is actually syntax compatible with librsvg, which has Apple Silicon out of the box:</p>
+<p>Homebrew will save us from having to compile many the dependencies manually. While a few folks on the <a href="https://github.com/nextcloud/desktop/issues/2659">Github issue thread discussing this</a> took the extra step of compiling openssl from scratch, we can just use the 1.1 version available through Homebrew. Additionally, it looks like some people were running a version of Inkscape through Rosetta for icon generation. Inkscape is actually syntax compatible with librsvg, which has Apple Silicon support out of the box:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">brew install pcre2 harfbuzz freetype cmake librsvg openssl@1.1
 </code></pre></div><h3 id="4-build-qt5-for-apple-silicon">4. Build Qt5 for Apple Silicon</h3>
-<p>While Qt6.2 was just released with native Apple Silicon support, the Nextcloud application isn&rsquo;t yet updated to be compatible with it. Nextcloud still uses Qt5, of which version 5.15 is the latest freely and publically available version. While there are newer versions of Qt5 available behind a paywall, 5.15 works really well for our needs. As there is no apple silicon binary available, we have to build it ourselves.</p>
+<p>Even though Qt6.2 was just released with native Apple Silicon support, the Nextcloud application isn&rsquo;t compatible with it yet. Nextcloud still uses Qt5, and version 5.15 is the latest freely and publically available version. There are newer versions than 5.15 of Qt5 available behind a paywall, but 5.15 works really well for our needs. As there is no Apple Silicon binary available, we have to build it ourselves.</p>
 <p>Clone the Qt5 repo and check out version 5.15:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">git clone git://code.qt.io/qt/qt5.git
 <span style="color:#66d9ef">cd</span> qt5
 git checkout 5.15
 </code></pre></div><p>Next we need to pull down all the related modules for the build. This will take a while, and is probably the longest step of this whole process:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">./init-repository
-</code></pre></div><p>The Qt5 actually has a missing header we need to add in order for it to compile correctly. This appeared to be ignored by Big Sur&rsquo;s version of the Clang compiler (clang 12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
+</code></pre></div><p>Qt5 actually has a missing header we need to add in order for it to compile correctly. This appears to be ignored by Big Sur&rsquo;s version of the clang compiler (clang 12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">sed -i -e &#39;s/#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/#include &lt;CoreGraphics\/CGColorSpace.h&gt; \n#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/g&#39; ~/ncsilicon/qt5/qtbase/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.h 
 </code></pre></div><p>Best practice is to build in a different folder than your source code, so the commands below create a new folder and get the stage set for the build:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="color:#66d9ef">cd</span> ..
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="color:#66d9ef">cd</span> ~/ncsilicon
 <span style="color:#66d9ef">mkdir</span> qt5-5.15-macOS-release
 <span style="color:#66d9ef">cd</span> qt5-5.15-macOS-release
 ../qt5/configure -release -prefix ./qtbase -nomake examples -nomake tests QMAKE_APPLE_DEVICE_ARCHS=arm64 -opensource -confirm-license -skip qt3d -skip qtwebengine
@@ -203,13 +203,13 @@ git clone git@github.com:frankosterfeld/qtkeychain.git
 make install
 </code></pre></div><h3 id="6-build-nextcloud-apple-silicon">6. Build Nextcloud Apple Silicon</h3>
 <p>Now that we have installed the dependencies from Homebrew, and compiled Apple Silicon versions of Qt5 and Qtkeychain, we&rsquo;re ready to build the Nextcloud desktop app.</p>
-<p>First clone the repo:</p>
+<p>First clone the repo and set up a build folder:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"><span style="color:#66d9ef">cd</span> ~/ncsilicon
 git clone git@github.com:nextcloud/desktop.git
 <span style="color:#66d9ef">cd</span> desktop
 <span style="color:#66d9ef">mkdir</span> build
 <span style="color:#66d9ef">cd</span> build
-</code></pre></div><p>We need to set up environment variables for the build:</p>
+</code></pre></div><p>We need to set up environment variables for the build, these tell the compiler where to find all of the libraries we just compiled such as Qt5 and qtkeychain.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">export OPENSSL_ROOT_DIR=$(brew --prefix openssl@1.1)
 export Qt5LinguistTools_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase
 export Qt5_DIR=~/ncsilicon/qt5-5.15-macOS-release/qtbase
