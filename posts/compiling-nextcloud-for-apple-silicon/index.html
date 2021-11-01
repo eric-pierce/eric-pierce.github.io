@@ -172,7 +172,7 @@
 <p>Create a folder in your home directory to build the related packages:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">mkdir ~/ncsilicon
 </code></pre></div><h3 id="3-install-dependencies-from-homebrew">3. Install Dependencies from Homebrew</h3>
-<p>Homebrew will save us from having to compile many the dependencies manually. While a few folks on the <a href="https://github.com/nextcloud/desktop/issues/2659">Github issue thread discussing this</a> took the extra step of compiling openssl from scratch, we can just use the 1.1 version available through Homebrew. Additionally, it looks like some people were running a version of Inkscape through Rosetta for icon generation. Inkscape is actually syntax compatible with librsvg, which has Apple Silicon support out of the box:</p>
+<p>Homebrew will save us from having to compile many the dependencies manually. It looks like some people were running a version of Inkscape through Rosetta for icon generation. Inkscape is actually syntax compatible with librsvg, which has Apple Silicon support out of the box:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">brew install pcre2 harfbuzz freetype cmake librsvg
 </code></pre></div><h3 id="4-build-qt5-for-apple-silicon">4. Build Qt5 for Apple Silicon</h3>
 <p>Even though Qt6.2 was just released with native Apple Silicon support, the Nextcloud application isn&rsquo;t compatible with it yet. Nextcloud still uses Qt5, and version 5.15 is the latest freely and publically available version. There are newer versions than 5.15 of Qt5 available behind a paywall, but 5.15 works really well for our needs. As there is no Apple Silicon binary available, we have to build it ourselves.</p>
@@ -237,7 +237,7 @@ make install
 </code></pre></div><h3 id="8-start-using-the-native-nextcloud-binary">8. Start using the native Nextcloud binary!</h3>
 <p>Go ahead and launch the app and you should be set! If MacOS complains about the app not being from a known developer, hold down the Control button and right click on it, and select &ldquo;Open&rdquo;. It will prompt you with a few &ldquo;are you sure&rdquo; messages but then you&rsquo;re set.</p>
 <h3 id="9-optional---sign-the-application-yourself">9. Optional - Sign the application yourself</h3>
-<p>If you&rsquo;re signed up for the developer program and have a certificate, you can sign the app yourself by replacing &ldquo;YOUR NAME&rdquo; with your organization name</p>
+<p>If you&rsquo;re signed up for the developer program and have a certificate, you can sign the app yourself by replacing &ldquo;YOUR NAME&rdquo; with your organization name and ID, assuming your certificate is installed:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">codesign --force --sign <span style="color:#e6db74">&#34;Developer ID Application: YOUR NAME AND DEVELOPER ID&#34;</span> --deep --verbose /Applications/Nextcloud.app
 </code></pre></div>
       </div>
