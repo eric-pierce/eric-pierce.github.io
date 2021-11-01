@@ -208,11 +208,11 @@ make install
 git clone git@github.com:openssl/openssl.git
 cd openssl
 git checkout OpenSSL_1_1_1-stable
-</code></pre></div><p>Then build the binary. OpenSSL uses caffinate to build. At the end, you&rsquo;ll have OpenSSL libraries available in /usr/local/lib:</p>
+</code></pre></div><p>Then build the binary. OpenSSL uses caffinate to build:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">export MACOSX_DEPLOYMENT_TARGET<span style="color:#f92672">=</span>10.13
 ./Configure shared enable-rc5 zlib darwin64-arm64-cc no-asm
 caffeinate make
-</code></pre></div><p>Copy the libraries you want to /usr/local/lib. Alternatively you can run make install, but that&rsquo;ll install far more files.</p>
+</code></pre></div><p>Copy the libraries you want to /usr/local/lib. Alternatively you can run make install, but that&rsquo;ll install far more files including documentation:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">sudo cp libssl.1.1.dylib libcrypto.1.1.dylib libcrypto.a libssl.a /usr/local/lib
 cd usr/local/lib
 sudo ln -s libssl.1.1.dylib libssl.dylib
