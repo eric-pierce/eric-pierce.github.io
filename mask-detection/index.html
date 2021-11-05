@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Mask Detection - eric-pierce.com</title><meta name="description" content="Data Science, Projects, Travel and More"><meta property="og:title" content="Mask Detection" />
+<meta property="og:description" content="Overview Mask wearing is a simple and powerful way to combat COVID, but it is most effective when practiced at scale within populations. Unfortunately mask wearing has become politicized in the United States, and businesses are often in the position of policing and enforcing mask wearing themselves.
+Enter the COVID Bouncer - an application which can be used to detect mask wearing without needing to put a real person at risk of exposure." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://eric-pierce.com/mask-detection/" /><meta property="og:image" content="https://eric-pierce.com/mask-detection/masktitle.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-12-02T18:59:50-06:00" />
+<meta property="article:modified_time" content="2020-12-02T18:59:50-06:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://eric-pierce.com/mask-detection/masktitle.png"/>
+<meta name="twitter:title" content="Mask Detection"/>
+<meta name="twitter:description" content="Overview Mask wearing is a simple and powerful way to combat COVID, but it is most effective when practiced at scale within populations. Unfortunately mask wearing has become politicized in the United States, and businesses are often in the position of policing and enforcing mask wearing themselves.
+Enter the COVID Bouncer - an application which can be used to detect mask wearing without needing to put a real person at risk of exposure."/>
+<meta name="application-name" content="eric-pierce.com">
+<meta name="apple-mobile-web-app-title" content="eric-pierce.com"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://eric-pierce.com/mask-detection/" /><link rel="prev" href="https://eric-pierce.com/building-a-personal-cloud/" /><link rel="next" href="https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Mask Detection",
+        "inLanguage": "",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/eric-pierce.com\/mask-detection\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/eric-pierce.com\/mask-detection\/masktitle.png",
+                            "width":  950 ,
+                            "height":  314 
+                        }],"genre": "posts","keywords": "Deep Learning, COVID-19, Computer Vision","wordcount":  686 ,
+        "url": "https:\/\/eric-pierce.com\/mask-detection\/","datePublished": "2020-12-02T18:59:50-06:00","dateModified": "2020-12-02T18:59:50-06:00","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/eric-pierce.com\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "Eric"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="eric-pierce.com">eric-pierce.com</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/now/"> Now </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/eric-pierce" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="eric-pierce.com">eric-pierce.com</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/now/" title="">Now</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/eric-pierce" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/mask-detection/masktitle.png"
+        data-srcset="/mask-detection/masktitle.png, /mask-detection/masktitle.png 1.5x, /mask-detection/masktitle.png 2x"
+        data-sizes="auto"
+        alt="/mask-detection/masktitle.png"
+        title="/mask-detection/masktitle.png" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Mask Detection</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Eric</a></span>&nbsp;<span class="post-category">published in <a href="/categories/data-science/"><i class="far fa-folder fa-fw"></i>Data Science</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-02">2020-12-02</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;686 words</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;4 minutes</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>Contents</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#tools-used">Tools Used</a></li>
+        <li><a href="#data-acquisition">Data Acquisition</a></li>
+        <li><a href="#data-preparation">Data Preparation</a></li>
+        <li><a href="#model-architecture">Model Architecture</a></li>
+        <li><a href="#deployment">Deployment</a></li>
+        <li><a href="#roadblocks">Roadblocks</a></li>
+        <li><a href="#next-steps">Next Steps</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h3 id="overview">Overview</h3>
+<p>Mask wearing is a simple and powerful way to combat COVID, but it is most effective when practiced at scale within populations. Unfortunately mask wearing has become politicized in the United States, and businesses are often in the position of policing and enforcing mask wearing themselves.</p>
+<p>Enter the <a href="https://github.com/eric-pierce/COVID-Bouncer" target="_blank" rel="noopener noreffer">COVID Bouncer</a> - an application which can be used to detect mask wearing without needing to put a real person at risk of exposure. When paired with a door lock, the COVID Bouncer can detect the presence of face masks before allowing entry into a business.</p>
+<p>The Bouncer is able to identify people not wearing masks as well as those wearing masks:</p>
+<p><img src="shot3.jpg" alt="Example 3" width="288" height="623" /> <img src="shot5.jpg" alt="Example 2" width="288" height="623" /></p>
+<p>It also functions with images that include multiple subjects as can be seen in the examples below:</p>
+<p><img src="shot1.jpg" alt="Example 1" width="288" height="623" /> <img src="shot4.jpg" alt="Example 4" width="288" height="623" /></p>
+<h3 id="tools-used">Tools Used</h3>
+<p>This project was built using Apple&rsquo;s development stack, including their <a href="https://developer.apple.com/machine-learning/create-ml/" target="_blank" rel="noopener noreffer">CreateML</a> framework.</p>
+<ul>
+<li>The only tools required to use this repository is ther XCode suite, which includes createML.</li>
+<li><a href="https://roboflow.com/" target="_blank" rel="noopener noreffer">Roboflow</a> was used during the data preparation phase.</li>
+</ul>
+<h3 id="data-acquisition">Data Acquisition</h3>
+<p>The data for this project came from two sources - one dataset compiled on <a href="https://www.kaggle.com/" target="_blank" rel="noopener noreffer">kaggle</a> and one compiled by the <a href="https://www.roboflow.com/" target="_blank" rel="noopener noreffer">Roboflow</a>. Both of these datasets consist of images of people wearing masks and people not wearing masks. Some images include a mix of mask wearing and non-wearing individuals. The Kaggle dataset also included incorrectly worn masks, but those were removed due to low data availability.</p>
+<ul>
+<li><a href="https://www.kaggle.com/andrewmvd/face-mask-detection" target="_blank" rel="noopener noreffer">Kaggle Mask Detection Dataset</a></li>
+<li><a href="https://public.roboflow.com/object-detection/mask-wearing" target="_blank" rel="noopener noreffer">Roboflow Mask Wearing Dataset</a>.</li>
+</ul>
+<h3 id="data-preparation">Data Preparation</h3>
+<p>These datasets required some modification to align labels, and to convert from their respective formats to one which Apple&rsquo;s CreateML expects.</p>
+<ul>
+<li>Modify the annotations to use &ldquo;with_mask&rdquo; and &ldquo;without_mask&rdquo; as labels</li>
+<li>Remove the &ldquo;mask_weared_incorrect&rdquo; label from the kaggle dataset</li>
+<li>Convert annotation component of both datasets from Pascal VOC XML to Apple&rsquo;s CreateML JSON</li>
+</ul>
+<p>I used a 70/20/10 split for train/test/validation for this dataset. The final dataset consisted of:</p>
+<ul>
+<li>698 training images</li>
+<li>199 testing images</li>
+<li>100 validation images</li>
+</ul>
+<h3 id="model-architecture">Model Architecture</h3>
+<p>I evaluated two training methods as part of this model development. Both models were trained for 18,000 iterations, which took ~14 hours per model. I used <a href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss" target="_blank" rel="noopener noreffer">loss as an evaluation measure</a> for both models, which is an indicator of how far off from correct prediction a model is for a single example.</p>
+<p>First I trained a Full Network (non-Transfer Learning) with an architecture based on YOLOv2:</p>
+<img src="fullnetwork_architecture.jpg" alt="Full Network Architecture" width="387" height="294" />
+<p>The Full Network training results are below, and resulted in a loss of 1.355</p>
+<img src="fullnetwork_training_graph.jpg" alt="Full Network Training" width="813" height="297" />
+<p>Second I trained a Transfer Network based on Apple&rsquo;s &ldquo;Object Vision Feature Print&rdquo;:</p>
+<img src="transfernetwork_architecture.jpg" alt="Transfer Network Architecture" width="387" height="294" />
+<p>The Transfer Network training results are below, and resulted in a loss of 0.31</p>
+<img src="transfernetwork_training_graph.jpg" alt="Transfer Network Training" width="813" height="297" />
+<h3 id="deployment">Deployment</h3>
+<p>I used my personal iPhone as my Edge Device. Modern iPhones include a specialized chip for Neural Network processing. I built my iPhone app using a framework available on <a href="https://github.com/tombaranowicz/ObjectDetectionWithCreateML" target="_blank" rel="noopener noreffer">GitHub here</a>. This framework was an excellent starting point, but I modified the application code to:</p>
+<ul>
+<li>Use the custom model I trained instead of the roadsign detector</li>
+<li>Only highlight objects detected when there is a &gt; 90% accuracy</li>
+<li>Not allow for objects to overlap with each other (ie no detection of both mask wearing and non-mask-wearing)</li>
+<li>Highlight masks in Green, and non-masks in Red</li>
+</ul>
+<h3 id="roadblocks">Roadblocks</h3>
+<p>I ran into some issues with my personal phone not functioning correctly. The app I built functioned as expected in the iOS simulator, as well on older iPhones such as the iPhone X. I expect that this has to do with the camera on the new phones capturing images in a different format.</p>
+<h3 id="next-steps">Next Steps</h3>
+<p>Next steps for this project are to apply it to live video as opposed to still images. I&rsquo;ve already developed an application which does this using the <a href="https://developer.apple.com/documentation/vision/recognizing_objects_in_live_capture" target="_blank" rel="noopener noreffer">Breakfast Detector</a> example written by Apple. I&rsquo;m not satisfied with the results of this yet.</p>
+<p>From a modeling architecture standpoint there is absolutely opportunity to increase accuracy. The simplest way to do this is to procure and train using more data. The dataset I have doesn’t have balanced examples of masks vs no-masks. Fortunately the gap is primarily on the non-mask class, and there are several datasets available which can be merged with my current dataset for a more balanced input.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/deep-learning/">Deep Learning</a>
+                </span><span><a href="/tags/covid-19/">COVID-19</a>
+                </span><span><a href="/tags/computer-vision/">Computer Vision</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>Updated on 2020-12-02</span>
+            </div><div class="post-info-mod"></div>
+        </div></div><div class="post-nav"><a href="/building-a-personal-cloud/" class="prev" rel="prev" title="Building a Personal Cloud"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/compiling-nextcloud-for-apple-silicon/" class="next" rel="next" title="Compiling Nextcloud for Apple Silicon">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span>&nbsp;|&nbsp;<span class="license">eric-pierce.com</span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('eric-pierce.com\u00A0Service Worker Registered');
+        }, err => console.error('eric-pierce.com\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('eric-pierce.com\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a></div><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/lunr/lunr.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script src="/js/theme.min.js"></script></body></html>
