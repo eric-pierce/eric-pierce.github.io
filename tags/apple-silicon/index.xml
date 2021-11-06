@@ -1,13 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Apple Silicon - Tag - eric-pierce.com</title>
-        <link>https://eric-pierce.com/tags/apple-silicon/</link>
-        <description>Apple Silicon - Tag - eric-pierce.com</description>
-        <generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 31 Oct 2021 12:48:21 -0500</lastBuildDate><atom:link href="https://eric-pierce.com/tags/apple-silicon/" rel="self" type="application/rss+xml" /><item>
-    <title>Compiling Nextcloud for Apple Silicon</title>
-    <link>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</link>
-    <pubDate>Sun, 31 Oct 2021 12:48:21 -0500</pubDate><guid>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</guid>
-    <description><![CDATA[<p>My 2016 MacBook Pro has really been showing its age, and the butterfly keyboard has been increasingly tough to type on, so I&rsquo;ve been in the market for a replacement. While I don&rsquo;t love the closed source approach Apple is taking with their Apple Silicon ARM64 Chips, their recent MacBook Pro lineup sets a totally new standard for power in a notebook.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Apple Silicon - Tag - eric-pierce.com</title><link>https://eric-pierce.com/tags/apple-silicon/</link><description>Apple Silicon - Tag - eric-pierce.com</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 31 Oct 2021 12:48:21 -0500</lastBuildDate><atom:link href="https://eric-pierce.com/tags/apple-silicon/" rel="self" type="application/rss+xml"/><item><title>Compiling Nextcloud for Apple Silicon</title><link>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</link><pubDate>Sun, 31 Oct 2021 12:48:21 -0500</pubDate><guid>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</guid><description><![CDATA[<p>My 2016 MacBook Pro has really been showing its age, and the butterfly keyboard has been increasingly tough to type on, so I&rsquo;ve been in the market for a replacement. While I don&rsquo;t love the closed source approach Apple is taking with their Apple Silicon ARM64 Chips, their recent MacBook Pro lineup sets a totally new standard for power in a notebook.</p>
 <p>I got my order in for the M1 Max, which is my first ARM64 based notebook, and started migrating over to it. As the first M1 based notebooks were released over a year ago, virtually all of the programs I want available have already been compiled to use the native M1 architecture, with one notable exception.</p>
 <p>Nextcloud, which I use as a partial G-Suite replacement, is still only compiled for Intel based macs which require Rosetta 2 in order to run. This wouldn&rsquo;t be that big of a deal as Rosetta 2 seems to be pretty seamless, but there are several reports of <a href="https://github.com/nextcloud/desktop/issues/2659#issuecomment-830787727" target="_blank" rel="noopener noreffer">huge amounts of CPU usage</a> by the Intel version of the app. Because Nextcloud is always running in the background, this isn&rsquo;t a &ldquo;once and awhile&rdquo; issue.</p>
 <p>Several enterprising folks with a little help from the Nextcloud team have successfully compiled a version of the Nextcloud app for Apple Silicon. Building on the work they put together in Github thread I was able to get a working installation, but it took some finesse. For anyone who wants to get a version compiled themselves, here are the specific steps I followed:</p>
@@ -232,7 +223,4 @@ make install
 <pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">codesign --force --sign <span class="s2">&#34;Developer ID Application: YOUR NAME AND DEVELOPER ID&#34;</span> --deep --verbose /Applications/Nextcloud.app
 </code></pre></td></tr></table>
 </div>
-</div>]]></description>
-</item>
-</channel>
-</rss>
+</div>]]></description></item></channel></rss>

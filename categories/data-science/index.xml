@@ -1,13 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Data Science - Category - eric-pierce.com</title>
-        <link>https://eric-pierce.com/categories/data-science/</link>
-        <description>Data Science - Category - eric-pierce.com</description>
-        <generator>Hugo -- gohugo.io</generator><lastBuildDate>Wed, 02 Dec 2020 18:59:50 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/categories/data-science/" rel="self" type="application/rss+xml" /><item>
-    <title>Mask Detection</title>
-    <link>https://eric-pierce.com/mask-detection/</link>
-    <pubDate>Wed, 02 Dec 2020 18:59:50 -0600</pubDate><guid>https://eric-pierce.com/mask-detection/</guid>
-    <description><![CDATA[<h3 id="overview">Overview</h3>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Data Science - Category - eric-pierce.com</title><link>https://eric-pierce.com/categories/data-science/</link><description>Data Science - Category - eric-pierce.com</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Wed, 02 Dec 2020 18:59:50 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/categories/data-science/" rel="self" type="application/rss+xml"/><item><title>Mask Detection</title><link>https://eric-pierce.com/mask-detection/</link><pubDate>Wed, 02 Dec 2020 18:59:50 -0600</pubDate><guid>https://eric-pierce.com/mask-detection/</guid><description><![CDATA[<h3 id="overview">Overview</h3>
 <p>Mask wearing is a simple and powerful way to combat COVID, but it is most effective when practiced at scale within populations. Unfortunately mask wearing has become politicized in the United States, and businesses are often in the position of policing and enforcing mask wearing themselves.</p>
 <p>Enter the <a href="https://github.com/eric-pierce/COVID-Bouncer" target="_blank" rel="noopener noreffer">COVID Bouncer</a> - an application which can be used to detect mask wearing without needing to put a real person at risk of exposure. When paired with a door lock, the COVID Bouncer can detect the presence of face masks before allowing entry into a business.</p>
 <p>The Bouncer is able to identify people not wearing masks as well as those wearing masks:</p>
@@ -62,7 +53,4 @@
 <h3 id="next-steps">Next Steps</h3>
 <p>Next steps for this project are to apply it to live video as opposed to still images. I&rsquo;ve already developed an application which does this using the <a href="https://developer.apple.com/documentation/vision/recognizing_objects_in_live_capture" target="_blank" rel="noopener noreffer">Breakfast Detector</a> example written by Apple. I&rsquo;m not satisfied with the results of this yet.</p>
 <p>From a modeling architecture standpoint there is absolutely opportunity to increase accuracy. The simplest way to do this is to procure and train using more data. The dataset I have doesn’t have balanced examples of masks vs no-masks. Fortunately the gap is primarily on the non-mask class, and there are several datasets available which can be merged with my current dataset for a more balanced input.</p>
-]]></description>
-</item>
-</channel>
-</rss>
+]]></description></item></channel></rss>
