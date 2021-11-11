@@ -317,7 +317,8 @@ portainer.EXAMPLE.COM.     IN A     20.20.10.2
 </code></pre></td></tr></table>
 </div>
 </div><p>The &ldquo;serial&rdquo; value can be set to any value, one suggestion would be the date you added the service.
-You should also replace the &ldquo;YOURNAME&rdquo; in the example above with an identifier. I personally use &ldquo;epierce&rdquo;.</p>
+You should also replace the &ldquo;YOURNAME&rdquo; in the example above with an identifier. I personally use &ldquo;epierce&rdquo;.
+You&rsquo;ll also want to modify the IP address on the last line of the file to be unique to that service, and to match the IP address you specified in your docker-compose file under <code>vpn-subnet: ipv4_address:</code> for that service.</p>
 <h3 id="secure-your-files">Secure Your Files</h3>
 <p>These files are a little sensitive, so let&rsquo;s lock them down to be root accessible only.</p>
 <div class="highlight"><div class="chroma">
@@ -332,7 +333,7 @@ sudo chmod <span class="m">600</span> ~/docker/wireguard
 </div>
 </div><h3 id="testing-access">Testing Access</h3>
 <p>Your services are now available only when you connect to your VPN. Go ahead and connect and try accessing one of your services by going to the domain name you configured (ie pga.EXAMPLE.COM).</p>
-<p>We aren&rsquo;t actually going through a reverse proxy here, and there isn&rsquo;t a service like Caddy, Traefik, or NGINX which manages port mapping. Services accessible over port 80 will work as normal, but services which need to be accessed on a non-standard port will need to have that port specified. For example portainer which I have configured to listen on port 9000, will need to be accessed by typing portainer.EXAMPLE.COM:9000 in your URL bar.</p>
+<p>We aren&rsquo;t actually going through a reverse proxy here, and there isn&rsquo;t a service like Caddy, Traefik, or NGINX which manages port mapping. Services accessible over port 80 will work as normal, but services which need to be accessed on a non-standard port will need to have that port specified. For example portainer which I have configured to listen on port 9000, will need to be accessed by typing <code>portainer.EXAMPLE.COM:9000</code> in your URL bar.</p>
 <p>Now you should be able to access your services securely, while keeping your standard services accessible as normal.</p>
 ]]></description></item><item><title>Building a Personal Cloud</title><link>https://eric-pierce.com/building-a-personal-cloud/</link><pubDate>Sat, 28 Nov 2020 17:16:19 -0600</pubDate><guid>https://eric-pierce.com/building-a-personal-cloud/</guid><description><![CDATA[<p>Like many others, I have numerous services which I use frequently for work, fun, productivity, and more. While using third party services is the easiest and fastest way to fulfill a need, it is far from the most privacy friendly, or depending on your view the most secure. I decided that I wanted to change that, and in 2019 I began to replace third party hosted services with services I can host on a personal Virtual Private Server, and have complete control of the data. Below is a summary of the replacements I made:</p>
 <h3 id="hosting-locations">Hosting Locations</h3>

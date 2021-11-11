@@ -317,7 +317,8 @@ portainer.EXAMPLE.COM.     IN A     20.20.10.2
 </code></pre></td></tr></table>
 </div>
 </div><p>The &ldquo;serial&rdquo; value can be set to any value, one suggestion would be the date you added the service.
-You should also replace the &ldquo;YOURNAME&rdquo; in the example above with an identifier. I personally use &ldquo;epierce&rdquo;.</p>
+You should also replace the &ldquo;YOURNAME&rdquo; in the example above with an identifier. I personally use &ldquo;epierce&rdquo;.
+You&rsquo;ll also want to modify the IP address on the last line of the file to be unique to that service, and to match the IP address you specified in your docker-compose file under <code>vpn-subnet: ipv4_address:</code> for that service.</p>
 <h3 id="secure-your-files">Secure Your Files</h3>
 <p>These files are a little sensitive, so let&rsquo;s lock them down to be root accessible only.</p>
 <div class="highlight"><div class="chroma">
@@ -332,7 +333,7 @@ sudo chmod <span class="m">600</span> ~/docker/wireguard
 </div>
 </div><h3 id="testing-access">Testing Access</h3>
 <p>Your services are now available only when you connect to your VPN. Go ahead and connect and try accessing one of your services by going to the domain name you configured (ie pga.EXAMPLE.COM).</p>
-<p>We aren&rsquo;t actually going through a reverse proxy here, and there isn&rsquo;t a service like Caddy, Traefik, or NGINX which manages port mapping. Services accessible over port 80 will work as normal, but services which need to be accessed on a non-standard port will need to have that port specified. For example portainer which I have configured to listen on port 9000, will need to be accessed by typing portainer.EXAMPLE.COM:9000 in your URL bar.</p>
+<p>We aren&rsquo;t actually going through a reverse proxy here, and there isn&rsquo;t a service like Caddy, Traefik, or NGINX which manages port mapping. Services accessible over port 80 will work as normal, but services which need to be accessed on a non-standard port will need to have that port specified. For example portainer which I have configured to listen on port 9000, will need to be accessed by typing <code>portainer.EXAMPLE.COM:9000</code> in your URL bar.</p>
 <p>Now you should be able to access your services securely, while keeping your standard services accessible as normal.</p>
 ]]></description></item><item><title>Compiling Nextcloud for Apple Silicon</title><link>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</link><pubDate>Sun, 31 Oct 2021 12:48:21 -0500</pubDate><guid>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</guid><description><![CDATA[<p>My 2016 MacBook Pro has really been showing its age, and the butterfly keyboard has been increasingly tough to type on, so I&rsquo;ve been in the market for a replacement. While I don&rsquo;t love the closed source approach Apple is taking with their Apple Silicon ARM64 Chips, their recent MacBook Pro lineup sets a totally new standard for power in a notebook.</p>
 <p>I got my order in for the M1 Max, which is my first ARM64 based notebook, and started migrating over to it. As the first M1 based notebooks were released over a year ago, virtually all of the programs I want available have already been compiled to use the native M1 architecture, with one notable exception.</p>
