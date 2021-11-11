@@ -1,4 +1,340 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - eric-pierce.com</title><link>https://eric-pierce.com/posts/</link><description>All Posts | eric-pierce.com</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 31 Oct 2021 12:48:21 -0500</lastBuildDate><atom:link href="https://eric-pierce.com/posts/" rel="self" type="application/rss+xml"/><item><title>Compiling Nextcloud for Apple Silicon</title><link>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</link><pubDate>Sun, 31 Oct 2021 12:48:21 -0500</pubDate><guid>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</guid><description><![CDATA[<p>My 2016 MacBook Pro has really been showing its age, and the butterfly keyboard has been increasingly tough to type on, so I&rsquo;ve been in the market for a replacement. While I don&rsquo;t love the closed source approach Apple is taking with their Apple Silicon ARM64 Chips, their recent MacBook Pro lineup sets a totally new standard for power in a notebook.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - eric-pierce.com</title><link>https://eric-pierce.com/posts/</link><description>All Posts | eric-pierce.com</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Mon, 08 Nov 2021 21:45:14 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/posts/" rel="self" type="application/rss+xml"/><item><title>Placing Select Docker Containers Behind a VPN</title><link>https://eric-pierce.com/placing-select-docker-containers-behind-a-vpn/</link><pubDate>Mon, 08 Nov 2021 21:45:14 -0600</pubDate><guid>https://eric-pierce.com/placing-select-docker-containers-behind-a-vpn/</guid><description><![CDATA[<h3 id="who-needs-a-vpn">Who Needs A VPN?</h3>
+<p>Docker enables containers to quickly be spun up and used anywhere, but one of the risks many self-hosters take is exposing sensitive services to the open web. There is a balance between safety and convenience with each application exposed, but there are some applications which have no need to be publicly accessible.</p>
+<p>These typically include administrative applications such as:</p>
+<ul>
+<li>Portainer</li>
+<li>PGAdmin (Postgres)</li>
+<li>phpMyAdmin (Mariadb)</li>
+<li>Redis Commander</li>
+<li>Any other service you don&rsquo;t want exposed</li>
+</ul>
+<p>One way to keep these services running but prevent them from being exposed is to place them behind a secure VPN. There are just a handful of major VPN protocols out there today, OpenVPN, IPSec, and the new Wireguard protocol are the big names. While Wireguard is new on the block and may not have had the level of auditing that OpenVPN has, it is blazing fast, and apparently so elegantly written that the creator of Linux, Linus Torvolds, <a href="https://lists.openwall.net/netdev/2018/08/02/124" target="_blank" rel="noopener noreffer">called it a work of art</a> before including it directly in the Linux Kernel.</p>
+<p>Some may want to hide all their applications behind a VPN for very high security, while others like may only want to hide the ones which are rarely needed. This guide outlines how to configure specific services to only be accessible from behind your VPN while leaving others publicly accessible.</p>
+<h3 id="set-up-a-local-docker-compose-network">Set up a local docker-compose network</h3>
+<p>Add a new network to docker-compose for your services to live on/</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vpn-subnet</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="setting-up-wireguard">Setting up Wireguard</h3>
+<p>Although Wireguard doesn&rsquo;t maintain a docker container, the excellent folks at linuxserver.io do. Setting up a wireguard container in Docker is as simple as adding a new service to your docker-compose file. This docker-compose snippet assumes you have a few environment variables configured:</p>
+<ul>
+<li><strong>DOCKERDIR</strong> set to the directory you want your services to store their non-temporary data files in. For this example we assume it is ~/docker/</li>
+<li><strong>DOMAINNAME</strong> set to the domain you&rsquo;re hosting the content on.</li>
+<li><strong>PUID</strong> set to the user id your docker runs under (run <code>id yourdockerusername</code> and find the numeric value associated with &ldquo;uid&rdquo;)</li>
+<li><strong>PGID</strong> set to the group id your docker runs under (run <code>id yourdockerusername</code> and find the numeric value associated with &ldquo;gid&rdquo;)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span><span class="nt">wireguard</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">wireguard</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">linuxserver/wireguard:latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.5</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">$DOCKERDIR/wireguard:/config</span><span class="w">
+</span><span class="w">      </span>- <span class="l">/lib/modules:/lib/modules</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">51820</span><span class="p">:</span><span class="m">51820</span><span class="l">/udp</span><span class="w">
+</span><span class="w">    </span><span class="nt">sysctls</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">net.ipv4.conf.all.src_valid_mark=1</span><span class="w">
+</span><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span><span class="w">      </span>- <span class="l">SYS_MODULE</span><span class="w">
+</span><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span><span class="w">      </span>- <span class="l">SERVERURL=wireguard.$DOMAINNAME</span><span class="w">
+</span><span class="w">      </span>- <span class="l">SERVERPORT=51820</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PEERS=2</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PEERDNS=auto</span><span class="w">
+</span><span class="w">      </span>- <span class="l">INTERNAL_SUBNET=10.13.14.0</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Most of the above should look pretty familiar if you&rsquo;ve used docker-compose before, with the exception of the &ldquo;sysctls&rdquo; and &ldquo;cap_add&rdquo; sections. The &ldquo;sysctls&rdquo; section enables the wireguard container to manage ipv4 network connections, something we need for our internal VPN subnet. The &ldquo;cap_add&rdquo; section essentially grants some extra privileges to our container, such as the ability to control network functions, and manage kernel modules. We&rsquo;re also mounting /lib/modules as a volume into the container.</p>
+<p>I chose to set the container specific environment variable &ldquo;PEERS&rdquo; to 2, which means that the container will automatically generate two profiles for connections. I personally use one for my phone to connect on the go and one for my desktop. You&rsquo;ll see the QR codes for these peers in the logs, and if you want to see one of the codes you can run <code>sudo docker exec -it wireguard /app/show-peer 1</code>.</p>
+<h3 id="set-up-dns-firewall-passthrough-and-port-forwarding">Set up DNS, Firewall Passthrough, and Port Forwarding</h3>
+<p>If you aren&rsquo;t using wildcard cname values for subdomains, you&rsquo;ll need to manually add &lsquo;wireguard&rsquo; as a new CNAME entry on your DNS manager. Note that this does open up the standard wireguard port of 51820 to the internet, so if you&rsquo;re hosting at home you will need to forward whichever port you decide to use from your router to your server.</p>
+<p>You&rsquo;ll also need to allow access to the port via your firewall</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">sudo ufw allow 51820/udp 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="place-container-behind-your-new-vpn">Place Container Behind your New VPN</h3>
+<p>We need to assign static ip addresses on the network we created above. The YAML format for this can be a bit different, and you may need to specify &ldquo;null&rdquo; as the target for any existing networks assigned to the containers. In my case I have an &ldquo;internal&rdquo; network used for services such as my database containers as can be seen in the examples of some services I&rsquo;ve placed behind my VPN below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span><span class="nt">pgadmin</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">pgadmin</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dpage/pgadmin4:latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.3</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">postgres</span><span class="w">
+</span><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">$DOCKERDIR/pgadmin:/var/lib/pgadmin</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PGADMIN_DEFAULT_EMAIL=$PERSONAL_EMAIL</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PGADMIN_LISTEN_PORT=5050</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">pma</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin/phpmyadmin:latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin</span><span class="w">
+</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.4</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">mariadb</span><span class="w">
+</span><span class="w">    </span><span class="nt">secrets</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">mysql_root_password</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span><span class="w">      </span>- <span class="l">PMA_HOST=mariadb</span><span class="w">
+</span><span class="w">      </span>- <span class="l">MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password</span><span class="w">
+</span><span class="w">      </span>- <span class="l">ServerName=$DOMAINNAME</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="assign-readable-domain-names">Assign Readable Domain Names</h3>
+<p>Technically your services are accessible from the IP addresses you&rsquo;ve assigned, after you&rsquo;ve connected to your VPN, but who is going to remember the IP address you assigned to each? To get around this and assign standard domain names, we can utilize the COREDNS setup running in the Wireguard container.</p>
+<p>First create a wireguard directory in your docker apps directory. This assumes that you&rsquo;re using your home directory as the docker apps directory</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">mkdir ~/docker/wireguard/coredns/ 
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we&rsquo;ll add the Corefile configuration it needs to manage local domain names.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">nano ~/docker/wireguard/coredns/Corefile
+</code></pre></td></tr></table>
+</div>
+</div><p>The below is an example of what the Corefile looks like for the four applications I&rsquo;ve configured. The first portion starting with &ldquo;loop&rdquo; effectively forwards DNS requests to the host DNS resolver. Replace the subdomains with the applications you want to host behind your VPN. Replace EXAMPLE.COM with your domain name, no CAPS needed.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="err">.</span> <span class="p">{</span>
+    <span class="err">loop</span>
+    <span class="err">forward</span> <span class="err">.</span> <span class="err">/etc/resolv.conf</span>
+<span class="p">}</span>
+
+<span class="err">portainer.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
+    <span class="err">file</span> <span class="err">portainer.EXAMPLE.COM.db</span>
+    <span class="err">log</span>
+    <span class="err">errors</span>
+<span class="p">}</span>
+
+<span class="err">pma.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
+    <span class="err">file</span> <span class="err">pma.EXAMPLE.COM.db</span>
+    <span class="err">log</span>
+    <span class="err">errors</span>
+<span class="p">}</span>
+
+<span class="err">pga.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>       
+    <span class="err">file</span> <span class="err">pga.EXAMPLE.COM.db</span>
+    <span class="err">log</span>                  
+    <span class="err">errors</span>               
+<span class="p">}</span>                        
+
+<span class="err">redis.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
+    <span class="err">file</span> <span class="err">redis.EXAMPLE.COM.db</span>
+    <span class="err">log</span>
+    <span class="err">errors</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we need to create the files referenced in the above Corefile, which hold the configuration details each service needs. Here&rsquo;s an example for my portainer container, again replace EXAMPLE.COM with your domain name.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">nano ~/docker/wireguard/coredns/portainer.EXAMPLE.COM.db
+</code></pre></td></tr></table>
+</div>
+</div><p>The contents should follow this structure, replacing EXAMPLE.COM with your domain name.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">portainer.EXAMPLE.COM.        3600 IN SOA portainer.EXAMPLE.COM. YOURNAME.portainer.EXAMPLE.COM. (
+                                2017042745 ; serial
+                                7200       ; refresh (2 hours)
+                                3600       ; retry (1 hour)
+                                1209600    ; expire (2 weeks)
+                                3600       ; minimum (1 hour)
+                                )
+portainer.EXAMPLE.COM.     IN A     20.20.10.2
+</code></pre></td></tr></table>
+</div>
+</div><p>The &ldquo;serial&rdquo; value can be set to any value, one suggestion would be the date you added the service.
+You should also replace the &ldquo;YOURNAME&rdquo; in the example above with an identifier. I personally use &ldquo;epierce&rdquo;.</p>
+<h3 id="secure-your-files">Secure Your Files</h3>
+<p>These files are a little sensitive, so let&rsquo;s lock them down to be root accessible only.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">sudo chown root:root ~/docker/wireguard 
+sudo chmod <span class="m">600</span> ~/docker/wireguard
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="testing-access">Testing Access</h3>
+<p>Your services are now available only when you connect to your VPN. Go ahead and connect and try accessing one of your services by going to the domain name you configured (ie pga.EXAMPLE.COM).</p>
+<p>We aren&rsquo;t actually going through a reverse proxy here, and there isn&rsquo;t a service like Caddy, Traefik, or NGINX which manages port mapping. Services accessible over port 80 will work as normal, but services which need to be accessed on a non-standard port will need to have that port specified. For example portainer which I have configured to listen on port 9000, will need to be accessed by typing portainer.EXAMPLE.COM:9000 in your URL bar.</p>
+<p>Now you should be able to access your services securely, while keeping your standard services accessible as normal.</p>
+]]></description></item><item><title>Compiling Nextcloud for Apple Silicon</title><link>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</link><pubDate>Sun, 31 Oct 2021 12:48:21 -0500</pubDate><guid>https://eric-pierce.com/compiling-nextcloud-for-apple-silicon/</guid><description><![CDATA[<p>My 2016 MacBook Pro has really been showing its age, and the butterfly keyboard has been increasingly tough to type on, so I&rsquo;ve been in the market for a replacement. While I don&rsquo;t love the closed source approach Apple is taking with their Apple Silicon ARM64 Chips, their recent MacBook Pro lineup sets a totally new standard for power in a notebook.</p>
 <p>I got my order in for the M1 Max, which is my first ARM64 based notebook, and started migrating over to it. As the first M1 based notebooks were released over a year ago, virtually all of the programs I want available have already been compiled to use the native M1 architecture, with one notable exception.</p>
 <p>Nextcloud, which I use as a partial G-Suite replacement, is still only compiled for Intel based macs which require Rosetta 2 in order to run. This wouldn&rsquo;t be that big of a deal as Rosetta 2 seems to be pretty seamless, but there are several reports of <a href="https://github.com/nextcloud/desktop/issues/2659#issuecomment-830787727" target="_blank" rel="noopener noreffer">huge amounts of CPU usage</a> by the Intel version of the app. Because Nextcloud is always running in the background, this isn&rsquo;t a &ldquo;once and awhile&rdquo; issue.</p>
 <p>Several enterprising folks with a little help from the Nextcloud team have successfully compiled a version of the client side Nextcloud app for Apple Silicon. Building on the work they put together in Github thread I was able to get a working installation, but it took some finesse. For anyone who wants to get a version compiled themselves, here are the specific steps I followed:</p>
