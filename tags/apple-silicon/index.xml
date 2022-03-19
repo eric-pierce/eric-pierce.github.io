@@ -9,8 +9,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="2-set-up-the-working-directory">2. Set up the working directory</h3>
 <p>Create a folder in your home directory to build the related packages:</p>
@@ -19,8 +19,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">mkdir ~/ncsilicon
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">mkdir ~/ncsilicon
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="3-install-dependencies-from-homebrew">3. Install Dependencies from Homebrew</h3>
 <p>Homebrew will save us from having to compile many the dependencies manually. It looks like some people were running a version of Inkscape through Rosetta for icon generation. Inkscape is actually syntax compatible with librsvg, which has Apple Silicon support out of the box:</p>
@@ -29,8 +29,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">brew install pcre2 harfbuzz freetype cmake librsvg
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">brew install pcre2 harfbuzz freetype cmake librsvg
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="4-build-qt5-for-apple-silicon">4. Build Qt5 for Apple Silicon</h3>
 <p>Even though Qt6.2 was just released with native Apple Silicon support, the Nextcloud application isn&rsquo;t compatible with it yet. Nextcloud still uses Qt5, and version 5.15 is the latest freely and publically available version. There are newer versions than 5.15 of Qt5 available behind a paywall, but 5.15 works really well for our needs. As there is no Apple Silicon binary available, we have to build it ourselves.</p>
@@ -43,11 +43,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">cd</span> ~/ncsilicon
-git clone git://code.qt.io/qt/qt5.git
-<span class="nb">cd</span> qt5
-git checkout 5.15
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">cd</span> ~/ncsilicon
+</span></span><span class="line"><span class="cl">git clone git://code.qt.io/qt/qt5.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> qt5
+</span></span><span class="line"><span class="cl">git checkout 5.15
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Next we need to pull down all the related modules for the build. This will take a while, and is probably the longest step of this whole process:</p>
 <div class="highlight"><div class="chroma">
@@ -55,8 +55,8 @@ git checkout 5.15
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">./init-repository
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">./init-repository
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Qt5 actually has a missing header we need to add in order for it to compile correctly. This appears to be ignored by Big Sur&rsquo;s version of the clang compiler (clang 12), but Monterey (clang 13) complains and fails if you try to compile without it. Add this header with:</p>
 <div class="highlight"><div class="chroma">
@@ -64,8 +64,8 @@ git checkout 5.15
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">sed -i -e <span class="s1">&#39;s/#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/#include &lt;CoreGraphics\/CGColorSpace.h&gt; \n#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/g&#39;</span> ~/ncsilicon/qt5/qtbase/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.h 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">sed -i -e <span class="s1">&#39;s/#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/#include &lt;CoreGraphics\/CGColorSpace.h&gt; \n#include &lt;qpa\/qplatformgraphicsbuffer.h&gt;/g&#39;</span> ~/ncsilicon/qt5/qtbase/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.h 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Best practice is to build in a different folder than your source code, so the commands below create a new folder and get the stage set for the build:</p>
 <div class="highlight"><div class="chroma">
@@ -76,11 +76,11 @@ git checkout 5.15
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">cd</span> ~/ncsilicon
-mkdir qt5-5.15-macOS-release
-<span class="nb">cd</span> qt5-5.15-macOS-release
-../qt5/configure -release -prefix ./qtbase -nomake examples -nomake tests <span class="nv">QMAKE_APPLE_DEVICE_ARCHS</span><span class="o">=</span>arm64 -opensource -confirm-license -skip qt3d -skip qtwebengine
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">cd</span> ~/ncsilicon
+</span></span><span class="line"><span class="cl">mkdir qt5-5.15-macOS-release
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> qt5-5.15-macOS-release
+</span></span><span class="line"><span class="cl">../qt5/configure -release -prefix ./qtbase -nomake examples -nomake tests <span class="nv">QMAKE_APPLE_DEVICE_ARCHS</span><span class="o">=</span>arm64 -opensource -confirm-license -skip qt3d -skip qtwebengine
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Assuming no errors are thrown, we&rsquo;re ready to build. This will take a bit, but not as long as initiating the repository did. We don&rsquo;t need to run make install here because we built the libraries in the same location we&rsquo;ll be using them.</p>
 <div class="highlight"><div class="chroma">
@@ -88,8 +88,8 @@ mkdir qt5-5.15-macOS-release
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">make -j10
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">make -j10
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="5-build-qtkeychain-for-apple-silicon">5. Build qtkeychain for Apple Silicon</h3>
 <p>Now that Qt5 is done, we need to build qtkeychain. Same deal as above, we need to clone the repo and set up a build folder:</p>
@@ -102,12 +102,12 @@ mkdir qt5-5.15-macOS-release
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">cd</span> ~/ncsilicon
-git clone git@github.com:frankosterfeld/qtkeychain.git
-<span class="nb">cd</span> qtkeychain
-mkdir build
-<span class="nb">cd</span> build
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">cd</span> ~/ncsilicon
+</span></span><span class="line"><span class="cl">git clone git@github.com:frankosterfeld/qtkeychain.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> qtkeychain
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Then build the binary. We do need to run make install here in order for the libraries to be included in the Qt5 folder.</p>
 <div class="highlight"><div class="chroma">
@@ -116,9 +116,9 @@ mkdir build
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DBUILD_TRANSLATIONS<span class="o">=</span>OFF
-make install
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DBUILD_TRANSLATIONS<span class="o">=</span>OFF
+</span></span><span class="line"><span class="cl">make install
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="6-build-openssl-for-apple-silicon">6. Build OpenSSL for Apple Silicon</h3>
 <p>Now that qtkeychain is done, we need to build OpenSSL. We need to clone the repo and switch to the version used by Nextcloud (1.1.1):</p>
@@ -130,11 +130,11 @@ make install
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">cd</span> ~/ncsilicon
-git clone git@github.com:openssl/openssl.git
-<span class="nb">cd</span> openssl
-git checkout OpenSSL_1_1_1-stable
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">cd</span> ~/ncsilicon
+</span></span><span class="line"><span class="cl">git clone git@github.com:openssl/openssl.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> openssl
+</span></span><span class="line"><span class="cl">git checkout OpenSSL_1_1_1-stable
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Then build the binary. OpenSSL uses caffinate to build:</p>
 <div class="highlight"><div class="chroma">
@@ -144,10 +144,10 @@ git checkout OpenSSL_1_1_1-stable
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">export</span> <span class="nv">MACOSX_DEPLOYMENT_TARGET</span><span class="o">=</span>10.13
-./Configure shared enable-rc5 zlib darwin64-arm64-cc no-asm
-caffeinate make
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">MACOSX_DEPLOYMENT_TARGET</span><span class="o">=</span>10.13
+</span></span><span class="line"><span class="cl">./Configure shared enable-rc5 zlib darwin64-arm64-cc no-asm
+</span></span><span class="line"><span class="cl">caffeinate make
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Copy the libraries you want to /usr/local/lib. Alternatively you can run make install, but that&rsquo;ll install far more files including documentation:</p>
 <div class="highlight"><div class="chroma">
@@ -158,11 +158,11 @@ caffeinate make
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">sudo cp libssl.1.1.dylib libcrypto.1.1.dylib libcrypto.a libssl.a /usr/local/lib
-<span class="nb">cd</span> /usr/local/lib
-sudo ln -s libssl.1.1.dylib libssl.dylib
-sudo ln -s libcrypto.1.1.dylib libcrypto.dylib
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">sudo cp libssl.1.1.dylib libcrypto.1.1.dylib libcrypto.a libssl.a /usr/local/lib
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/lib
+</span></span><span class="line"><span class="cl">sudo ln -s libssl.1.1.dylib libssl.dylib
+</span></span><span class="line"><span class="cl">sudo ln -s libcrypto.1.1.dylib libcrypto.dylib
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="7-build-nextcloud-apple-silicon">7. Build Nextcloud Apple Silicon</h3>
 <p>Now that we have installed the dependencies from Homebrew, and compiled Apple Silicon versions of Qt5, Qtkeychain, and OpenSSL, we&rsquo;re ready to build the Nextcloud desktop app.</p>
@@ -176,12 +176,12 @@ sudo ln -s libcrypto.1.1.dylib libcrypto.dylib
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">cd</span> ~/ncsilicon
-git clone git@github.com:nextcloud/desktop.git
-<span class="nb">cd</span> desktop
-mkdir build
-<span class="nb">cd</span> build
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">cd</span> ~/ncsilicon
+</span></span><span class="line"><span class="cl">git clone git@github.com:nextcloud/desktop.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> desktop
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>We need to set up environment variables for the build, these tell the compiler where to find all of the libraries we just compiled such as Qt5 and qtkeychain.</p>
 <div class="highlight"><div class="chroma">
@@ -192,11 +192,11 @@ mkdir build
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">export</span> <span class="nv">OPENSSL_ROOT_DIR</span><span class="o">=</span>~/ncsilicon/openssl
-<span class="nb">export</span> <span class="nv">Qt5LinguistTools_DIR</span><span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase
-<span class="nb">export</span> <span class="nv">Qt5_DIR</span><span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase
-<span class="nb">export</span> <span class="nv">Qt5Keychain_DIR</span><span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase/lib/cmake/Qt5Keychain
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">OPENSSL_ROOT_DIR</span><span class="o">=</span>~/ncsilicon/openssl
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">Qt5LinguistTools_DIR</span><span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">Qt5_DIR</span><span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">Qt5Keychain_DIR</span><span class="o">=</span>~/ncsilicon/qt5-5.15-macOS-release/qtbase/lib/cmake/Qt5Keychain
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Now its build time. This will take a little time but nothing too long. We&rsquo;ll use make install here which will package the application up in the Applications directory.</p>
 <div class="highlight"><div class="chroma">
@@ -206,10 +206,10 @@ mkdir build
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/Applications -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
-make -j10
-make install
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/Applications -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</span></span><span class="line"><span class="cl">make -j10
+</span></span><span class="line"><span class="cl">make install
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="8-start-using-the-native-nextcloud-binary">8. Start using the native Nextcloud binary!</h3>
 <p>Go ahead and launch the app and you should be set! If MacOS complains about the app not being from a known developer, hold down the Control button and right click on it, and select &ldquo;Open&rdquo;. It will prompt you with a few &ldquo;are you sure&rdquo; messages but then you&rsquo;re set.</p>
@@ -220,7 +220,7 @@ make install
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">codesign --force --sign <span class="s2">&#34;Developer ID Application: YOUR NAME AND DEVELOPER ID&#34;</span> --deep --verbose /Applications/Nextcloud.app
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">codesign --force --sign <span class="s2">&#34;Developer ID Application: YOUR NAME AND DEVELOPER ID&#34;</span> --deep --verbose /Applications/Nextcloud.app
+</span></span></code></pre></td></tr></table>
 </div>
 </div>]]></description></item></channel></rss>

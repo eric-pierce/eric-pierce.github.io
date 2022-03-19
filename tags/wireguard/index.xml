@@ -20,11 +20,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vpn-subnet</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vpn-subnet</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="setting-up-wireguard">Setting up Wireguard</h3>
 <p>Although Wireguard doesn&rsquo;t maintain a docker container, the excellent folks at linuxserver.io do. Setting up a wireguard container in Docker is as simple as adding a new service to your docker-compose file. This docker-compose snippet assumes you have a few environment variables configured:</p>
@@ -66,35 +66,35 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span><span class="nt">wireguard</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">wireguard</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">linuxserver/wireguard:latest</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.5</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">$DOCKERDIR/wireguard:/config</span><span class="w">
-</span><span class="w">      </span>- <span class="l">/lib/modules:/lib/modules</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">51820</span><span class="p">:</span><span class="m">51820</span><span class="l">/udp</span><span class="w">
-</span><span class="w">    </span><span class="nt">sysctls</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">net.ipv4.conf.all.src_valid_mark=1</span><span class="w">
-</span><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">NET_ADMIN</span><span class="w">
-</span><span class="w">      </span>- <span class="l">SYS_MODULE</span><span class="w">
-</span><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
-</span><span class="w">      </span>- <span class="l">SERVERURL=wireguard.$DOMAINNAME</span><span class="w">
-</span><span class="w">      </span>- <span class="l">SERVERPORT=51820</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PEERS=2</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PEERDNS=auto</span><span class="w">
-</span><span class="w">      </span>- <span class="l">INTERNAL_SUBNET=10.13.14.0</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wireguard</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">wireguard</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">linuxserver/wireguard:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$DOCKERDIR/wireguard:/config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/lib/modules:/lib/modules</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">51820</span><span class="p">:</span><span class="m">51820</span><span class="l">/udp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sysctls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">net.ipv4.conf.all.src_valid_mark=1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SYS_MODULE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SERVERURL=wireguard.$DOMAINNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SERVERPORT=51820</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PEERS=2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PEERDNS=auto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">INTERNAL_SUBNET=10.13.14.0</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Most of the above should look pretty familiar if you&rsquo;ve used docker-compose before, with the exception of the &ldquo;sysctls&rdquo; and &ldquo;cap_add&rdquo; sections. The &ldquo;sysctls&rdquo; section enables the wireguard container to manage ipv4 network connections, something we need for our internal VPN subnet. The &ldquo;cap_add&rdquo; section essentially grants some extra privileges to our container, such as the ability to control network functions, and manage kernel modules. We&rsquo;re also mounting /lib/modules as a volume into the container.</p>
 <p>I chose to set the container specific environment variable &ldquo;PEERS&rdquo; to 2, which means that the container will automatically generate two profiles for connections. I personally use one for my phone to connect on the go and one for my desktop. You&rsquo;ll see the QR codes for these peers in the logs, and if you want to see one of the codes you can run <code>sudo docker exec -it wireguard /app/show-peer 1</code>.</p>
@@ -106,8 +106,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">sudo ufw allow 51820/udp 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">sudo ufw allow 51820/udp 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="place-container-behind-your-new-vpn">Place Container Behind your New VPN</h3>
 <p>We need to assign static ip addresses on the network we created above. The YAML format for this can be a bit different, and you may need to specify &ldquo;null&rdquo; as the target for any existing networks assigned to the containers. In my case I have an &ldquo;internal&rdquo; network used for services such as my database containers as can be seen in the examples of some services I&rsquo;ve placed behind my VPN below:</p>
@@ -157,49 +157,49 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span><span class="nt">pgadmin</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">pgadmin</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dpage/pgadmin4:latest</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-</span><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.3</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">postgres</span><span class="w">
-</span><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">$DOCKERDIR/pgadmin:/var/lib/pgadmin</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PGADMIN_DEFAULT_EMAIL=$PERSONAL_EMAIL</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PGADMIN_LISTEN_PORT=5050</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">pma</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin/phpmyadmin:latest</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-</span><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.4</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">mariadb</span><span class="w">
-</span><span class="w">    </span><span class="nt">secrets</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">mysql_root_password</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
-</span><span class="w">      </span>- <span class="l">PMA_HOST=mariadb</span><span class="w">
-</span><span class="w">      </span>- <span class="l">MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password</span><span class="w">
-</span><span class="w">      </span>- <span class="l">ServerName=$DOMAINNAME</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pgadmin</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">pgadmin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dpage/pgadmin4:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$DOCKERDIR/pgadmin:/var/lib/pgadmin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGADMIN_DEFAULT_EMAIL=$PERSONAL_EMAIL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGADMIN_LISTEN_PORT=5050</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pma</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin/phpmyadmin:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpmyadmin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vpn-subnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">20.20.10.4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">mariadb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">secrets</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">mysql_root_password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PMA_HOST=mariadb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">ServerName=$DOMAINNAME</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="assign-readable-domain-names">Assign Readable Domain Names</h3>
 <p>Technically your services are accessible from the IP addresses you&rsquo;ve assigned, after you&rsquo;ve connected to your VPN, but who is going to remember the IP address you assigned to each? To get around this and assign standard domain names, we can utilize the COREDNS setup running in the Wireguard container.</p>
@@ -209,8 +209,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">mkdir ~/docker/wireguard/coredns/ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">mkdir ~/docker/wireguard/coredns/ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Now we&rsquo;ll add the Corefile configuration it needs to manage local domain names.</p>
 <div class="highlight"><div class="chroma">
@@ -218,8 +218,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">nano ~/docker/wireguard/coredns/Corefile
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">nano ~/docker/wireguard/coredns/Corefile
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>The below is an example of what the Corefile looks like for the four applications I&rsquo;ve configured. The first portion starting with &ldquo;loop&rdquo; effectively forwards DNS requests to the host DNS resolver. Replace the subdomains with the applications you want to host behind your VPN. Replace EXAMPLE.COM with your domain name, no CAPS needed.</p>
 <div class="highlight"><div class="chroma">
@@ -254,35 +254,35 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="err">.</span> <span class="p">{</span>
-    <span class="err">loop</span>
-    <span class="err">forward</span> <span class="err">.</span> <span class="err">/etc/resolv.conf</span>
-<span class="p">}</span>
-
-<span class="err">portainer.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
-    <span class="err">file</span> <span class="err">portainer.EXAMPLE.COM.db</span>
-    <span class="err">log</span>
-    <span class="err">errors</span>
-<span class="p">}</span>
-
-<span class="err">pma.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
-    <span class="err">file</span> <span class="err">pma.EXAMPLE.COM.db</span>
-    <span class="err">log</span>
-    <span class="err">errors</span>
-<span class="p">}</span>
-
-<span class="err">pga.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>       
-    <span class="err">file</span> <span class="err">pga.EXAMPLE.COM.db</span>
-    <span class="err">log</span>                  
-    <span class="err">errors</span>               
-<span class="p">}</span>                        
-
-<span class="err">redis.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
-    <span class="err">file</span> <span class="err">redis.EXAMPLE.COM.db</span>
-    <span class="err">log</span>
-    <span class="err">errors</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="line"><span class="cl"><span class="err">.</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">loop</span>
+</span></span><span class="line"><span class="cl">    <span class="err">forward</span> <span class="err">.</span> <span class="err">/etc/resolv.conf</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">portainer.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">file</span> <span class="err">portainer.EXAMPLE.COM.db</span>
+</span></span><span class="line"><span class="cl">    <span class="err">log</span>
+</span></span><span class="line"><span class="cl">    <span class="err">errors</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">pma.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">file</span> <span class="err">pma.EXAMPLE.COM.db</span>
+</span></span><span class="line"><span class="cl">    <span class="err">log</span>
+</span></span><span class="line"><span class="cl">    <span class="err">errors</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">pga.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>       
+</span></span><span class="line"><span class="cl">    <span class="err">file</span> <span class="err">pga.EXAMPLE.COM.db</span>
+</span></span><span class="line"><span class="cl">    <span class="err">log</span>                  
+</span></span><span class="line"><span class="cl">    <span class="err">errors</span>               
+</span></span><span class="line"><span class="cl"><span class="p">}</span>                        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">redis.EXAMPLE.COM:</span><span class="mi">53</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">file</span> <span class="err">redis.EXAMPLE.COM.db</span>
+</span></span><span class="line"><span class="cl">    <span class="err">log</span>
+</span></span><span class="line"><span class="cl">    <span class="err">errors</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Now we need to create the files referenced in the above Corefile, which hold the configuration details each service needs. Here&rsquo;s an example for my portainer container, again replace EXAMPLE.COM with your domain name.</p>
 <div class="highlight"><div class="chroma">
@@ -290,8 +290,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">nano ~/docker/wireguard/coredns/portainer.EXAMPLE.COM.db
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">nano ~/docker/wireguard/coredns/portainer.EXAMPLE.COM.db
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>The contents should follow this structure, replacing EXAMPLE.COM with your domain name.</p>
 <div class="highlight"><div class="chroma">
@@ -306,15 +306,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">portainer.EXAMPLE.COM.        3600 IN SOA portainer.EXAMPLE.COM. YOURNAME.portainer.EXAMPLE.COM. (
-                                2017042745 ; serial
-                                7200       ; refresh (2 hours)
-                                3600       ; retry (1 hour)
-                                1209600    ; expire (2 weeks)
-                                3600       ; minimum (1 hour)
-                                )
-portainer.EXAMPLE.COM.     IN A     20.20.10.2
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">portainer.EXAMPLE.COM.        3600 IN SOA portainer.EXAMPLE.COM. YOURNAME.portainer.EXAMPLE.COM. (
+</span></span><span class="line"><span class="cl">                                2017042745 ; serial
+</span></span><span class="line"><span class="cl">                                7200       ; refresh (2 hours)
+</span></span><span class="line"><span class="cl">                                3600       ; retry (1 hour)
+</span></span><span class="line"><span class="cl">                                1209600    ; expire (2 weeks)
+</span></span><span class="line"><span class="cl">                                3600       ; minimum (1 hour)
+</span></span><span class="line"><span class="cl">                                )
+</span></span><span class="line"><span class="cl">portainer.EXAMPLE.COM.     IN A     20.20.10.2
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>The &ldquo;serial&rdquo; value can be set to any value, one suggestion would be the date you added the service.
 You should also replace the &ldquo;YOURNAME&rdquo; in the example above with an identifier. I personally use &ldquo;epierce&rdquo;.
@@ -327,9 +327,9 @@ You&rsquo;ll also want to modify the IP address on the last line of the file to 
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh">sudo chown root:root ~/docker/wireguard 
-sudo chmod <span class="m">600</span> ~/docker/wireguard
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">sudo chown root:root ~/docker/wireguard 
+</span></span><span class="line"><span class="cl">sudo chmod <span class="m">600</span> ~/docker/wireguard
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="testing-access">Testing Access</h3>
 <p>Your services are now available only when you connect to your VPN. Go ahead and connect and try accessing one of your services by going to the domain name you configured (ie pga.EXAMPLE.COM).</p>
