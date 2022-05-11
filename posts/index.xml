@@ -570,7 +570,7 @@ You&rsquo;ll also want to modify the IP address on the last line of the file to 
 <h3 id="tools-used">Tools Used</h3>
 <p>This project was built using Apple&rsquo;s development stack, including their <a href="https://developer.apple.com/machine-learning/create-ml/" target="_blank" rel="noopener noreffer">CreateML</a> framework.</p>
 <ul>
-<li>The only tools required to use this repository is ther XCode suite, which includes createML.</li>
+<li>The only tools required to use this repository is ther XCode suite, which includes CreateML.</li>
 <li><a href="https://roboflow.com/" target="_blank" rel="noopener noreffer">Roboflow</a> was used during the data preparation phase.</li>
 </ul>
 <h3 id="data-acquisition">Data Acquisition</h3>
