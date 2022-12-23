@@ -3,7 +3,7 @@
 
 ### Why Mastodon
 
-As part of my self-hosting journey, I shut down essentailly all my social media in 2019 with the exception of my [LinkedIn](https://www.linkedin.com/in/ericrpierce/), [Spotify](https://open.spotify.com/user/p8h9h74rsfedu9e20d97kh7mj), and a twitter account which I used to follow but not to post. I didn't think it was possible to really self-host social media, but the events of the past two months and the [explosive growth](https://www.theverge.com/2022/12/20/23518325/mastodon-monthly-active-users-twitter-elon-musk) that Mastodon has undergone has changed that. Regardless of what you think about the recent changes at Twitter and the rise of Mastdon in headlines, the idea of decentralized and self-hostable social media is super interesting, and totally feasible.
+As part of my self-hosting journey, I shut down essentially all my social media in 2019 with the exception of my [LinkedIn](https://www.linkedin.com/in/ericrpierce/), [Spotify](https://open.spotify.com/user/p8h9h74rsfedu9e20d97kh7mj), and a twitter account which I used to follow but not to post. I didn't think it was possible to really self-host social media, but the events of the past two months and the [explosive growth](https://www.theverge.com/2022/12/20/23518325/mastodon-monthly-active-users-twitter-elon-musk) that Mastodon has undergone has changed that. Regardless of what you think about the recent changes at Twitter and the rise of Mastdon in headlines, the idea of decentralized and self-hostable social media is super interesting, and totally feasible.
 
 {{< image src="mastomeme.jpg" caption="The Self Hoster by [Joe Dean](https://mastodon.joedean.dev/@joe/109455796397314685)" linked=false >}}
 
@@ -30,7 +30,7 @@ Mastodon is one of several software platforms that communicate with each other t
 
 I initially tried out Plermoa due to ease of setup (it requires far less resources and work to get running), but ultimately decided to go for a full Mastodon setup. Lucky for me (any anyone who wants to set up Mastodon) the always incredible folks over at [linuxserver.io](https://www.linuxserver.io/) recently released [a single docker image](https://github.com/linuxserver/docker-mastodon) which packages up all the services needed to stand up Mastodon yourself except for redis and postgres. 
 
-Because social media is inherantly "social" I set up a new VPS and used a new domain for my Mastodon instance rather than the domain/VPS I use for my [personal services](https://eric-pierce.com/building-a-personal-cloud/). The docker compose file can be found [here](https://github.com/eric-pierce/Mastadon-and-MC/blob/main/docker-compose.yml). Here's the relevant section for mastodon, the other key services (postgres and redis) are standard installs, check out the full docker compose to see the entire setup file.
+Because social media is inherently "social" I set up a new VPS and used a new domain for my Mastodon instance rather than the domain/VPS I use for my [personal services](https://eric-pierce.com/building-a-personal-cloud/). The docker compose file can be found [here](https://github.com/eric-pierce/Mastadon-and-MC/blob/main/docker-compose.yml). Here's the relevant section for mastodon, the other key services (postgres and redis) are standard installs, check out the full docker compose to see the entire setup file.
 
 ```yaml open=true
   mastodon:
@@ -103,22 +103,22 @@ Because social media is inherantly "social" I set up a new VPS and used a new do
 
 There are a few quirks to be aware of with the linuxserver.io image:
 * Some services are optional such as using an S3 bucket for media hosting (I highly recommend) and implementing ElasticSearch (probably not necessary, especially for a small instance)
-* Mastodon includes an internal forced 301 redirect to https, and then proxies to port 443, but it does this with a self-signed certificate. This can create challenges if you're putting the Mastodo service behind another reverse proxy like nginx, or in my case Traefik.
+* Mastodon includes an internal forced 301 redirect to https, and then proxies to port 443, but it does this with a self-signed certificate. This can create challenges if you're putting the Mastodon service behind another reverse proxy like nginx, or in my case Traefik.
   * I'm actually still working with this one, but in the near term if you set your instance up to skip the internal verification of the certificate, you'll be set. All externally facing traffic will be secure, but some of the traffic inside of the container won't necessarily be. More discussion on this [here](https://github.com/linuxserver/docker-mastodon/issues/5)
 
 ### Media Storage
-Social Media can generate a surprising amount of media, very quickly. Even on my single-user instance I've ammassed around 12Gb of media, only a month in. One option would be to just let your server handle all the media, but that can eat up a lot of storage space, and generate high costs depending on your plan and allocated bandwidth. Backblaze put together a [fantastic guide](https://www.backblaze.com/blog/free-image-hosting-with-cloudflare-transform-rules-and-backblaze-b2/) which outlines setting up cloudflare as a caching layer in front of backblaze to bring your bandwidth costs to essentially 0, with very low storage costs and high availability of your media, all hosted under your own domain name.
+Social Media can generate a surprising amount of media, very quickly. Even on my single-user instance I've amassed around 12Gb of media, only a month in. One option would be to just let your server handle all the media, but that can eat up a lot of storage space, and generate high costs depending on your plan and allocated bandwidth. Backblaze put together a [fantastic guide](https://www.backblaze.com/blog/free-image-hosting-with-cloudflare-transform-rules-and-backblaze-b2/) which outlines setting up cloudflare as a caching layer in front of backblaze to bring your bandwidth costs to essentially 0, with very low storage costs and high availability of your media, all hosted under your own domain name.
 
 ### Accessing Twitter
-Not all Twitter users will move to Mastodon, and there are a few ways to follow their accounts, 
+Not all Twitter users will move to Mastodon, and there are a few ways to follow their accounts. My goal here was to have a single location to access my content, have it free of ads, and ideally to be stored on my server.
 
 **[Nitter](https://nitter.net/)**
 * Nitter is essentially an mirror of content from Twitter. I haven't personally used it, but it seems like a very simple way to access both Twitter and Mastodon content. Unfortunatley I don't see any way to bring Nitter + Mastodon into one seamless activity feed, so I explored other options.
 
 **[BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive)**
-* This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentailly allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance". 
+* This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance". 
 
-Here's the birdsitelive portion of my docker-compose file:
+Here's the BirdsiteLive portion of my docker-compose file:
 
 ```yaml
   bsl:
