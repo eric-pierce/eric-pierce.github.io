@@ -1,0 +1,307 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mastodon - Tag - eric-pierce.com</title><link>https://eric-pierce.com/tags/mastodon/</link><description>Mastodon - Tag - eric-pierce.com</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Fri, 23 Dec 2022 14:36:36 -0600</lastBuildDate><atom:link href="https://eric-pierce.com/tags/mastodon/" rel="self" type="application/rss+xml"/><item><title>Moving to Mastodon</title><link>https://eric-pierce.com/moving-to-mastodon/</link><pubDate>Fri, 23 Dec 2022 14:36:36 -0600</pubDate><guid>https://eric-pierce.com/moving-to-mastodon/</guid><description><![CDATA[<h3 id="why-mastodon">Why Mastodon</h3>
+<p>As part of my self-hosting journey, I shut down essentailly all my social media in 2019 with the exception of my <a href="https://www.linkedin.com/in/ericrpierce/" target="_blank" rel="noopener noreffer">LinkedIn</a>, <a href="https://open.spotify.com/user/p8h9h74rsfedu9e20d97kh7mj" target="_blank" rel="noopener noreffer">Spotify</a>, and a twitter account which I used to follow but not to post. I didn&rsquo;t think it was possible to really self-host social media, but the events of the past two months and the <a href="https://www.theverge.com/2022/12/20/23518325/mastodon-monthly-active-users-twitter-elon-musk" target="_blank" rel="noopener noreffer">explosive growth</a> that Mastodon has undergone has changed that. Regardless of what you think about the recent changes at Twitter and the rise of Mastdon in headlines, the idea of decentralized and self-hostable social media is super interesting, and totally feasible.</p>
+<figure><figcaption class="image-caption">The Self Hoster by <a href="https://mastodon.joedean.dev/@joe/109455796397314685" target="_blank" rel="noopener noreffer">Joe Dean</a></figcaption>
+    </figure>
+<p>As always it&rsquo;s important to approach self-hosting with eyes wide open, and there are definitely pros and cons compared to the big-tech versions of social media:</p>
+<div class="details admonition success open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-check-circle fa-fw"></i>Pros<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Your data lives on your server and you own it. You get to decide how public you want to make it. Privacy and social media are usually completely mutually exclusive, but not with Mastodon.</li>
+<li>No Ads, No Algorithm: Mastodon isn&rsquo;t a single company looking to drive revenue, so advertising and algorithm driven</li>
+<li>Communities (Instances) can be local and fantastic
+<ul>
+<li>Yes this is generally the most confusing part about Mastodon, but it&rsquo;s also a benefit. Mastodon instances are generally built around a concept or common interest, like a location, profession, etc. I found some excellent Mastodon instances based in <a href="https://atx.pub" target="_blank" rel="noopener noreffer">Austin, TX</a>, and several more in Chicago.</li>
+<li>While facebook has groups, Instagram and Twitter don&rsquo;t really have a concept like this outside of hashtags and recommendations</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+<div class="details admonition failure open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-times-circle fa-fw"></i>Cons<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Mastodon isn&rsquo;t as simple for the layman as a centralized service like twitter</li>
+<li>Many accounts you may care about only post on twitter (though I have a workaround for this)</li>
+<li>Finding content or being found yourself may be difficult
+<ul>
+<li>There is no service which searches all Mastodon or Fediverse accounts, and your Mastodon instance will only be able to search other instances it knows about.</li>
+<li>If this is a big issue for you, some simple workarounds are to follow hashtags you&rsquo;re interested in, or leverage a relay</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+<h3 id="setting-up-an-instance">Setting up an Instance</h3>
+<p>Mastodon is one of several software platforms that communicate with each other through the <a href="https://en.wikipedia.org/wiki/ActivityPub" target="_blank" rel="noopener noreffer">ActivityPub</a> protocol. Any platform that uses ActivityPub can technically talk to each other, though some are more specialized around how closely they resemble walled garden services. Mastodon and Pleroma are two that closely resemble Twitter, and others like <a href="https://pixelfed.org/" target="_blank" rel="noopener noreffer">Pixelfed</a> are more closely like Instagram. Any platform which can use the ActivityPub protocol, can be classified as &ldquo;part of the fediverse&rdquo;.</p>
+<p>I initially tried out Plermoa due to ease of setup (it requires far less resources and work to get running), but ultimately decided to go for a full Mastodon setup. Lucky for me (any anyone who wants to set up Mastodon) the always incredible folks over at <a href="https://www.linuxserver.io/" target="_blank" rel="noopener noreffer">linuxserver.io</a> recently released <a href="https://github.com/linuxserver/docker-mastodon" target="_blank" rel="noopener noreffer">a single docker image</a> which packages up all the services needed to stand up Mastodon yourself except for redis and postgres.</p>
+<p>Because social media is inherantly &ldquo;social&rdquo; I set up a new VPS and used a new domain for my Mastodon instance rather than the domain/VPS I use for my <a href="https://eric-pierce.com/building-a-personal-cloud/" target="_blank" rel="noopener noreffer">personal services</a>. The docker compose file can be found <a href="https://github.com/eric-pierce/Mastadon-and-MC/blob/main/docker-compose.yml" target="_blank" rel="noopener noreffer">here</a>. Here&rsquo;s the relevant section for mastodon, the other key services (postgres and redis) are standard installs, check out the full docker compose to see the entire setup file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mastodon</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">mastodon</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">linuxserver/mastodon:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">internal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8002</span><span class="p">:</span><span class="m">80</span><span class="l">/tcp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8443</span><span class="p">:</span><span class="m">443</span><span class="l">/tcp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$DOCKERDIR/mastodon:/config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">LOCAL_DOMAIN=$MAST_DOMAIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">REDIS_HOST=redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">REDIS_PORT=6379</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DB_HOST=postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DB_USER=mastodon</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DB_NAME=mastodon</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DB_PASS=$MAST_POSTGRES_PASSWORD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DB_PORT=5432</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">ES_ENABLED=false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SECRET_KEY_BASE=$SECRET_KEY_BASE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">OTP_SECRET=$OTP_SECRET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">VAPID_PRIVATE_KEY=$VAPID_PRIVATE_KEY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">VAPID_PUBLIC_KEY=$VAPID_PUBLIC_KEY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_SERVER=$SMTP_HOST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_PORT=$SMTP_PORT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_LOGIN=$SMTP_USERNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_PASSWORD=$SMTP_PASSWORD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_FROM_ADDRESS=$SMTP_FROM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">S3_ENABLED=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">S3_ENDPOINT=$S3_ENDPOINT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">S3_HOSTNAME=$S3_HOSTNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">S3_BUCKET=$S3_BUCKET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">S3_ALIAS_HOST=$S3_ALIAS_HOST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#- WEB_DOMAIN=$MAST_DOMAIN #optional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#- RAILS_SERVE_STATIC_FILES=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#- ES_HOST=es #optional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#- ES_PORT=9200 #optional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#- ES_USER=elastic #optional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#- ES_PASS=elastic #optional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.enable=true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">## HTTP Routers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.mastodon-rtr.entrypoints=https&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.mastodon-rtr.rule=Host(`$MAST_DOMAIN`)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.mastodon-rtr.tls=true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">## Middlewares</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.mastodon-rtr.middlewares=chain-no-auth@file&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">## HTTP Services</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.mastodon-rtr.service=mastodon-svc&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.services.mastodon-svc.loadbalancer.server.port=443&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.services.mastodon-svc.loadbalancer.server.scheme=https&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.services.mastodon-svc.loadbalancer.serversTransport=masto@file&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>There are a few quirks to be aware of with the linuxserver.io image:</p>
+<ul>
+<li>Some services are optional such as using an S3 bucket for media hosting (I highly recommend) and implementing ElasticSearch (probably not necessary, especially for a small instance)</li>
+<li>Mastodon includes an internal forced 301 redirect to https, and then proxies to port 443, but it does this with a self-signed certificate. This can create challenges if you&rsquo;re putting the Mastodo service behind another reverse proxy like nginx, or in my case Traefik.
+<ul>
+<li>I&rsquo;m actually still working with this one, but in the near term if you set your instance up to skip the internal verification of the certificate, you&rsquo;ll be set. All externally facing traffic will be secure, but some of the traffic inside of the container won&rsquo;t necessarily be. More discussion on this <a href="https://github.com/linuxserver/docker-mastodon/issues/5" target="_blank" rel="noopener noreffer">here</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="media-storage">Media Storage</h3>
+<p>Social Media can generate a surprising amount of media, very quickly. Even on my single-user instance I&rsquo;ve ammassed around 12Gb of media, only a month in. One option would be to just let your server handle all the media, but that can eat up a lot of storage space, and generate high costs depending on your plan and allocated bandwidth. Backblaze put together a <a href="https://www.backblaze.com/blog/free-image-hosting-with-cloudflare-transform-rules-and-backblaze-b2/" target="_blank" rel="noopener noreffer">fantastic guide</a> which outlines setting up cloudflare as a caching layer in front of backblaze to bring your bandwidth costs to essentially 0, with very low storage costs and high availability of your media, all hosted under your own domain name.</p>
+<h3 id="accessing-twitter">Accessing Twitter</h3>
+<p>Not all Twitter users will move to Mastodon, and there are a few ways to follow their accounts,</p>
+<p><strong><a href="https://nitter.net/" target="_blank" rel="noopener noreffer">Nitter</a></strong></p>
+<ul>
+<li>Nitter is essentially an mirror of content from Twitter. I haven&rsquo;t personally used it, but it seems like a very simple way to access both Twitter and Mastodon content. Unfortunatley I don&rsquo;t see any way to bring Nitter + Mastodon into one seamless activity feed, so I explored other options.</li>
+</ul>
+<p><strong><a href="https://github.com/NicolasConstant/BirdsiteLive" target="_blank" rel="noopener noreffer">BirdsiteLive</a></strong></p>
+<ul>
+<li>This is what I ended up going with. <a href="https://github.com/NicolasConstant/BirdsiteLive" target="_blank" rel="noopener noreffer">BirdsiteLive</a> is a bridge between the Twitter API and the ActivityPub protocol. It essentailly allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the &ldquo;instance&rdquo;.</li>
+</ul>
+<p>Here&rsquo;s the birdsitelive portion of my docker-compose file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">bsl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">birdsitelive</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nicolasconstant/birdsitelive:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">internal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="kc">no</span>-<span class="l">new-privileges:true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8009:80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=$TZ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PUID=$PUID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PGID=$PGID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Instance:Domain=bsl.$DOMAINNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Instance:AdminEmail=name@domain.ext</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Instance:ResolveMentionsInProfiles=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Db:Type=postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Db:Host=postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Db:Name=birdsitelive</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Db:User=$BSL_POSTGRES_USER</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Db:Password=$BSL_POSTGRES_PASSWORD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Twitter:ConsumerKey=$BSL_TWITTER_API_KEY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Twitter:ConsumerSecret=$BSL_TWITTER_API_SECRET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Moderation:FollowersWhiteListing=$MAST_DOMAIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Instance:Name=$BSL_NAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.enable=true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">## HTTP Routers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.bsl-rtr.entrypoints=https&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.bsl-rtr.rule=Host(`bsl.$DOMAINNAME`)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.bsl-rtr.tls=true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">## Middlewares</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.bsl-rtr.middlewares=chain-no-auth@file&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.bsl-rtr.middlewares=middlewares-bsl@file&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">## HTTP Services</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.routers.bsl-rtr.service=bsl-svc&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;traefik.http.services.bsl-svc.loadbalancer.server.port=80&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>There is still a fair amount to be desired with this, and it requires a special API from Twitter which needs to be &ldquo;approved&rdquo; (it appears that Twitter has automated this approval, and my API account request was granted immediately after I filled out the form requesting it). The API also has limits which you can see on your BirdsiteLive page on whatever domain you host it on, so you&rsquo;ll want to only allow instances / users to access and follow accounts (configured in the compose file).</p>
+<p>I&rsquo;d like to replace this with Nitter at some point, if there is a good solution to convert a Nitter feed into an ActivityPub feed.</p>
+<h3 id="mobile-apps">Mobile Apps</h3>
+<p>I only used twitter on my phone, so the mobile experience is pretty important. I&rsquo;m an iOS user, and after evaluating a few different apps, I found two which are fantastic:</p>
+<ol>
+<li><strong>Free</strong> <a href="https://apps.apple.com/gt/app/mastoot/id1501485410?l=en" target="_blank" rel="noopener noreffer">Mastoot</a>: This app is fairly mature, and has all the features I would want in a Mastodon app. It isn&rsquo;t open source, but it checks pretty much every other box.</li>
+<li><strong>Paid</strong> <a href="https://tapbots.social/@Ivory" target="_blank" rel="noopener noreffer">Ivory</a>: For those who are used to Tweetbot, this will feel like home. Tapbots are working to implement a Mastodon version of Tweetbot, called Ivory. This is currently in alpha testing, so if you want to hop on the train you&rsquo;ll need to get in on their TestFlight list. They&rsquo;ve been posting TestFlight openings to the Ivory Mastodon account. The alpha/beta isn&rsquo;t paid, but I&rsquo;m sure that like Tweetbot the final product will be.</li>
+</ol>
+<h3 id="get-posting">Get Posting</h3>
+<p>Yes <em>Posting</em> - I&rsquo;m glad that the &ldquo;toot&rdquo; <a href="https://gizmodo.com/mastodon-toot-retired-twitter-tweet-equivalent-1849786221" target="_blank" rel="noopener noreffer">went the way of the actual Mastodon</a>, it needed to happen for anyone to take the service seriously.</p>
+<p>If you have any thoughts, different experiences, or want to correct anything above, hit me up on <a href="https://pierce.xyz/@eric" target="_blank" rel="noopener noreffer">Mastodon</a>!</p>
+]]></description></item></channel></rss>
