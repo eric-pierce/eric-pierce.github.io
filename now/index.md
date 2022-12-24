@@ -3,7 +3,8 @@
 
 Here's what I'm working on now:
 
-* Just installed Carplay on the OEM hardware of an unsupported Toyota Prius (writeup coming soon)
-* I just moved to Austin, TX and am getting familiar with the community
-* Earlier this year I finished my Master's of Data Science at Northwestern, which I've been doing on nights/weekends for the past three years
-* Working through LeetCode questions
+* I recently marked my first full year in Austin, TX and I'm finding new local communities to join
+* I'm very excited to have a full live music agenda again for the first time in the past few years
+* Looking into self-hosting my podcasts and audiobooks and moving away from Apple Podcasts and Audible
+* Playing around with applications of some of the new Stable Diffusion models
+* Trying to get more experience directly working with earth observation data and new applications
