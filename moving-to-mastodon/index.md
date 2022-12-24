@@ -26,7 +26,7 @@ As always it's important to approach self-hosting with eyes wide open, and there
 {{< /admonition >}}
 
 ### Setting up an Instance
-Mastodon is one of several software platforms that communicate with each other through the [ActivityPub](https://en.wikipedia.org/wiki/ActivityPub) protocol. Any platform that uses ActivityPub can technically talk to each other, though some are more specialized around how closely they resemble walled garden services. Mastodon and Pleroma are two that closely resemble Twitter, and others like [Pixelfed](https://pixelfed.org/) are more closely like Instagram. Any platform which can use the ActivityPub protocol, can be classified as "part of the fediverse".
+Mastodon is one of several software platforms that communicate with each other through the [ActivityPub](https://en.wikipedia.org/wiki/ActivityPub) protocol. Any platform that uses ActivityPub can technically talk to each other, though some are more specialized around how closely they resemble walled garden services. Mastodon and Pleroma are two that closely resemble Twitter, and others like [Pixelfed](https://pixelfed.org/) are more similar to Instagram. Any platform which can use the ActivityPub protocol, can be classified as "part of the fediverse".
 
 I initially tried out Plermoa due to ease of setup (it requires far less resources and work to get running), but ultimately decided to go for a full Mastodon setup. Lucky for me (any anyone who wants to set up Mastodon) the always incredible folks over at [linuxserver.io](https://www.linuxserver.io/) recently released [a single docker image](https://github.com/linuxserver/docker-mastodon) which packages up all the services needed to stand up Mastodon yourself except for redis and postgres. 
 
@@ -116,7 +116,7 @@ Not all Twitter users will move to Mastodon, and there are a few ways to follow 
 * Nitter is essentially an mirror of content from Twitter. I haven't personally used it, but it seems like a very simple way to access both Twitter content without actually using Twitter. Unfortunatley I don't see any way to bring Nitter + Mastodon into one seamless activity feed, so I explored other options.
 
 **[BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive)**
-* This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance". Its a little messy, ubt i
+* This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance".
 
 Here's the BirdsiteLive portion of my docker-compose file:
 
