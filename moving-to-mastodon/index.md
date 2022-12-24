@@ -113,7 +113,7 @@ Social Media can generate a surprising amount of media, very quickly. Even on my
 Not all Twitter users will move to Mastodon, and there are a few ways to follow their accounts. My goal here was to have a single location to access my content, have it free of ads, and ideally to be stored on my server.
 
 **[Nitter](https://nitter.net/)**
-* Nitter is essentially an mirror of content from Twitter. I haven't personally used it, but it seems like a very simple way to access both Twitter and Mastodon content. Unfortunatley I don't see any way to bring Nitter + Mastodon into one seamless activity feed, so I explored other options.
+* Nitter is essentially an mirror of content from Twitter. I haven't personally used it, but it seems like a very simple way to access both Twitter content without actually using Twitter. Unfortunatley I don't see any way to bring Nitter + Mastodon into one seamless activity feed, so I explored other options.
 
 **[BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive)**
 * This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance". 
