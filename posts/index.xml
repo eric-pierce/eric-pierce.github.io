@@ -35,6 +35,7 @@
 <li>If this is a big issue for you, some simple workarounds are to follow hashtags you&rsquo;re interested in, or leverage a relay</li>
 </ul>
 </li>
+<li>Content moderation won&rsquo;t be much of an issue for a single user instance like I&rsquo;m using, but as soon as you start to scale you&rsquo;re responsible for moderating the content on your instance.</li>
 </ul>
 </div>
         </div>

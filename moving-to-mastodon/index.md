@@ -23,6 +23,7 @@ As always it's important to approach self-hosting with eyes wide open, and there
 * Finding content or being found yourself may be difficult 
   * There is no service which searches all Mastodon or Fediverse accounts, and your Mastodon instance will only be able to search other instances it knows about.
   * If this is a big issue for you, some simple workarounds are to follow hashtags you're interested in, or leverage a relay
+* Content moderation won't be much of an issue for a single user instance like I'm using, but as soon as you start to scale you're responsible for moderating the content on your instance.
 {{< /admonition >}}
 
 ### Setting up an Instance
