@@ -5,7 +5,7 @@
 
 As part of my self-hosting journey, I shut down essentially all my social media in 2019 with the exception of my [LinkedIn](https://www.linkedin.com/in/ericrpierce/), [Spotify](https://open.spotify.com/user/p8h9h74rsfedu9e20d97kh7mj), and a twitter account which I used to follow but not to post. I didn't think it was possible to really self-host social media, but the events of the past two months and the [explosive growth](https://www.theverge.com/2022/12/20/23518325/mastodon-monthly-active-users-twitter-elon-musk) that Mastodon has undergone has changed that. Regardless of what you think about the recent changes at Twitter and the rise of Mastdon in headlines, the idea of decentralized and self-hostable social media is super interesting, and totally feasible.
 
-{{< image src="mastomeme.jpg" caption="The Self Hoster by [Joe Dean](https://mastodon.joedean.dev/@joe/109455796397314685)" linked=false >}}
+{{< image src="mastomeme.jpg" height=486 width=329 caption="The Self Hoster by [Joe Dean](https://mastodon.joedean.dev/@joe/109455796397314685)" linked=false >}}
 
 As always it's important to approach self-hosting with eyes wide open, and there are definitely pros and cons compared to the big-tech versions of social media:
 
@@ -116,7 +116,7 @@ Not all Twitter users will move to Mastodon, and there are a few ways to follow 
 * Nitter is essentially an mirror of content from Twitter. I haven't personally used it, but it seems like a very simple way to access both Twitter content without actually using Twitter. Unfortunatley I don't see any way to bring Nitter + Mastodon into one seamless activity feed, so I explored other options.
 
 **[BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive)**
-* This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance". 
+* This is what I ended up going with. [BirdsiteLive](https://github.com/NicolasConstant/BirdsiteLive) is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the "instance". Its a little messy, ubt i
 
 Here's the BirdsiteLive portion of my docker-compose file:
 

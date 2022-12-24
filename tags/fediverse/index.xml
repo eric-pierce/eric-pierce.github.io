@@ -200,7 +200,7 @@
 </ul>
 <p><strong><a href="https://github.com/NicolasConstant/BirdsiteLive" target="_blank" rel="noopener noreffer">BirdsiteLive</a></strong></p>
 <ul>
-<li>This is what I ended up going with. <a href="https://github.com/NicolasConstant/BirdsiteLive" target="_blank" rel="noopener noreffer">BirdsiteLive</a> is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the &ldquo;instance&rdquo;.</li>
+<li>This is what I ended up going with. <a href="https://github.com/NicolasConstant/BirdsiteLive" target="_blank" rel="noopener noreffer">BirdsiteLive</a> is a bridge between the Twitter API and the ActivityPub protocol. It essentially allows you to follow any twitter account on Mastodon, just by looking up the twitter username and using the BirdsiteLive domain you set up as the &ldquo;instance&rdquo;. Its a little messy, ubt i</li>
 </ul>
 <p>Here&rsquo;s the BirdsiteLive portion of my docker-compose file:</p>
 <div class="highlight"><div class="chroma">
