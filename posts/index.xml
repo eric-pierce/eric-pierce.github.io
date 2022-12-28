@@ -10,7 +10,7 @@
         <div class="details-content">
             <div class="admonition-content"><ul>
 <li>Your data lives on your server and you own it. You get to decide how public you want to make it. Privacy and social media are usually completely mutually exclusive, but not with Mastodon.</li>
-<li>No Ads, No Algorithm: Mastodon isn&rsquo;t a single company looking to drive revenue, so advertising and algorithm driven</li>
+<li>No Ads, No Algorithm: Mastodon isn&rsquo;t a single company looking to drive revenue, so advertising and algorithm driven content aren&rsquo;t present at all.</li>
 <li>Communities (Instances) can be local and fantastic
 <ul>
 <li>Yes this is generally the most confusing part about Mastodon, but it&rsquo;s also a benefit. Mastodon instances are generally built around a concept or common interest, like a location, profession, etc. I found some excellent Mastodon instances based in <a href="https://atx.pub" target="_blank" rel="noopener noreffer">Austin, TX</a>, and several more in Chicago.</li>

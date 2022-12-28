@@ -11,7 +11,7 @@ As always it's important to approach self-hosting with eyes wide open, and there
 
 {{< admonition type=success title="Pros" open=true >}}
 * Your data lives on your server and you own it. You get to decide how public you want to make it. Privacy and social media are usually completely mutually exclusive, but not with Mastodon.
-* No Ads, No Algorithm: Mastodon isn't a single company looking to drive revenue, so advertising and algorithm driven 
+* No Ads, No Algorithm: Mastodon isn't a single company looking to drive revenue, so advertising and algorithm driven content aren't present at all.
 * Communities (Instances) can be local and fantastic
   * Yes this is generally the most confusing part about Mastodon, but it's also a benefit. Mastodon instances are generally built around a concept or common interest, like a location, profession, etc. I found some excellent Mastodon instances based in [Austin, TX](https://atx.pub), and several more in Chicago.
   * While facebook has groups, Instagram and Twitter don't really have a concept like this outside of hashtags and recommendations
