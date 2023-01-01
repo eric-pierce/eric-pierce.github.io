@@ -177,6 +177,6 @@ I only used twitter on my phone, so the mobile experience is pretty important. I
 2. **Paid** [Ivory](https://tapbots.social/@Ivory): For those who are used to Tweetbot, this will feel like home. Tapbots are working to implement a Mastodon version of Tweetbot, called Ivory. This is currently in alpha testing, so if you want to hop on the train you'll need to get in on their TestFlight list. They've been posting TestFlight openings to the Ivory Mastodon account. The alpha/beta isn't paid, but I'm sure that like Tweetbot the final product will be.
 
 ### Get Posting
-Yes _Posting_ - I'm glad that the "toot" [went the way of the actual Mastodon](https://gizmodo.com/mastodon-toot-retired-twitter-tweet-equivalent-1849786221), it needed to happen for anyone to take the service seriously. 
+Yes _Posting_ - I'm glad that the "toot" [went the way of the actual Mastodon](https://gizmodo.com/mastodon-toot-retired-twitter-tweet-equivalent-1849786221), it needed to happen for anyone to take the service seriously.
 
 If you have any thoughts, different experiences, or want to correct anything above, hit me up on [Mastodon](https://pierce.xyz/@eric)!
