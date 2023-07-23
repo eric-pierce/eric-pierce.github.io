@@ -3,8 +3,14 @@
 
 Here's what I'm working on now:
 
-* I recently marked my first full year in Austin, TX and I'm finding new local communities to join
-* I'm very excited to have a full live music agenda again for the first time in the past few years
-* Looking into self-hosting my podcasts and audiobooks and moving away from Apple Podcasts and Audible
-* Playing around with applications of some of the new Stable Diffusion models
-* Trying to get more experience directly working with earth observation data and new applications
+### AI / Data Science
+* I'm attending more Data Science and AI meetups in the Austin area, if you have one you like [reach out](https://pierce.xyz/@eric)
+* Planning writeups on applications of transfer learning with Stable Diffusion, running LLMs locally, and personal data EDA
+
+### Self Hosting
+* I moved all my notes from a self-hosted [Standardnotes](https://github.com/standardnotes/server) instance, to Obsidian using remotely-sync and Nextcloud
+* I recently started digitizing and locally hosting all documents with [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) and my health data with [Fasten Health](https://github.com/fastenhealth/fasten-onprem)
+
+### Life
+* I'm enjoying a full live music calendar both in Austin and across the US
+* I'm engaged and planning my wedding for 2024!
