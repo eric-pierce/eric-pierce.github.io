@@ -5,6 +5,7 @@ Here's what I'm working on now:
 
 ### AI / Data Science
 * I'm attending more Data Science and AI meetups in the Austin area, if you have one you like [reach out](https://pierce.xyz/@eric)
+* Working on a Retrieval Augmented Generation (RAG) Post
 * Planning writeups on applications of transfer learning with Stable Diffusion, running LLMs locally, and personal data EDA
 
 ### Self Hosting
@@ -13,4 +14,4 @@ Here's what I'm working on now:
 
 ### Life
 * I'm enjoying a full live music calendar both in Austin and across the US
-* I'm engaged and planning my wedding for 2024!
+* I'm getting married!
