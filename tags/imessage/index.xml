@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>IMessage - Tag - eric-pierce.com</title>
+        <link>http://localhost:1313/tags/imessage/</link>
+        <description>IMessage - Tag - eric-pierce.com</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Dec 2022 13:35:41 -0500</lastBuildDate><atom:link href="http://localhost:1313/tags/imessage/" rel="self" type="application/rss+xml" /><item>
+    <title>iMessage EDA and Analysis</title>
+    <link>http://localhost:1313/imessage-analysis/</link>
+    <pubDate>Fri, 23 Dec 2022 13:35:41 -0500</pubDate><guid>http://localhost:1313/imessage-analysis/</guid>
+    <description><![CDATA[<p>Text conversations are a treasure trove of data about who we communicate with, what we talk about, and more. Let&rsquo;s dig into what these conversations can tell us!</p>
+<p>If you&rsquo;re an iPhone / Mac user, you&rsquo;re sitting on a treasure trove of interesting personal connection and communication data just waiting to be given a voice. I personally used this data to put together a book for my SO as a gift for Valentine&rsquo;s day, but the possabilities are endless!</p>
+<h3 id="finding-your-messages">Finding your Messages</h3>
+<p>iPhones and Macs store iMessage content in an sqlite database. This isn&rsquo;t the easiest thing to get off of an iPhone (though it is possible), but it is very easy to pull from a Mac so long as you have iMessage enabled, and iMessage in iCloud turned on (this is a setting on both iPhones and Macs).</p>
+<p>By default terminal applications don&rsquo;t have full access to the OSX filesystem, so you can either go into settings and enable Privacy &amp; Security -&gt; Full Disk Access -&gt; Your Terminal client of choice, or you can just use Finder to snag the chat database by navigating to ~/Library/Messages/ and copying chat.db somplace you can access it.</p>
+<p><figure><figcaption class="image-caption">Pull up Go to Folder</figcaption>
+    </figure> <figure><figcaption class="image-caption">Navigate to Messages</figcaption>
+     </figure></p>
+]]></description>
+</item>
+</channel>
+</rss>

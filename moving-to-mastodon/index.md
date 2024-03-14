@@ -1,6 +1,8 @@
 # Moving to Mastodon
 
 
+*March 2024 Note: BirdsiteLive no longer functions, but a fork called bird.makeup does (for now). The [official bird.makeup repo](https://sr.ht/~cloutier/bird.makeup/) at sr.ht doesn't appear to work on instances not hosted by the developer, but [a fork on github](https://github.com/rursache/bird.makeup) does. Check out my relevant [docker-compose file](https://github.com/eric-pierce/Mastodon-and-MC/blob/main/docker-compose.yml) to see the latest updates I've made*
+
 ### Why Mastodon
 
 As part of my self-hosting journey, I shut down essentially all my social media in 2019 with the exception of my [LinkedIn](https://www.linkedin.com/in/ericrpierce/), [Spotify](https://open.spotify.com/user/p8h9h74rsfedu9e20d97kh7mj), and a twitter account which I used to follow but not to post. I didn't think it was possible to really self-host social media, but the events of the past two months and the [explosive growth](https://www.theverge.com/2022/12/20/23518325/mastodon-monthly-active-users-twitter-elon-musk) that Mastodon has undergone has changed that. Regardless of what you think about the recent changes at Twitter and the rise of Mastdon in headlines, the idea of decentralized and self-hostable social media is super interesting, and totally feasible.
